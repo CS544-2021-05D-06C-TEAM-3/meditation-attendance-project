@@ -1,4 +1,4 @@
-package edu.miu.meditation.domain;
+package edu.miu.attendance.domain;
 
 public class Course {
 }

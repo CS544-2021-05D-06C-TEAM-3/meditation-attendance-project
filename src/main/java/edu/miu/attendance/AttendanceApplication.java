@@ -1,13 +1,13 @@
-package edu.miu.meditation;
+package edu.miu.attendance;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MeditationApplication {
+public class AttendanceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MeditationApplication.class, args);
+        SpringApplication.run(AttendanceApplication.class, args);
     }
 
 }

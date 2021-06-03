@@ -1,4 +1,4 @@
-package edu.miu.meditation.service;
+package edu.miu.attendance.service;
 
 public class CourseService {
 }
