@@ -1,4 +1,4 @@
-package edu.miu.meditation.repository;
+package edu.miu.attendance.repository;
 
 public interface CourseRepository {
 }

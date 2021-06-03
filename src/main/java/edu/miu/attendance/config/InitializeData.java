@@ -1,4 +1,4 @@
-package edu.miu.meditation.config;
+package edu.miu.attendance.config;
 
 public class InitializeData {
 }

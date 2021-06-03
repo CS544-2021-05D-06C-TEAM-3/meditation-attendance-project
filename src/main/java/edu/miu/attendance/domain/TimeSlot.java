@@ -4,20 +4,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name="course")
-public class Course {
+@Table(name="timeSlot")
+public class TimeSlot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String name;
-    private String code;
+    @Column(name = "begin_date",nullable = false)
+    private LocalDateTime beginTime;
+    @Column(name = "end_date",nullable = false)
+    private LocalDateTime endTime;
     private String description;
-    @OneToMany
-    private List<CourseOffering> courseOfferings = new ArrayList<CourseOffering>();
 }
