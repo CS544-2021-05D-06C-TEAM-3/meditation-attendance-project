@@ -8,5 +8,4 @@ import edu.miu.attendance.domain.CourseSession;
 
 public interface CourseSessionRepository extends JpaRepository<CourseSession, Long> {
     CourseOffering findByCourseOffering(CourseOffering courseOffering);
-    TimeSlot findByCourseSession(CourseSession courseSession);
 }
