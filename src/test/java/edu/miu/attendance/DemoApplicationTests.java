@@ -1,4 +1,4 @@
-package edu.miu.meditation;
+package edu.miu.attendance;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
