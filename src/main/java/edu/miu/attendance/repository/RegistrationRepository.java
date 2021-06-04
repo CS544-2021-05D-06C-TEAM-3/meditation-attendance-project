@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import edu.miu.attendance.domain.Registration;
 
-public interface RegistrationRepository extends JpaRepository<Registration, String> {
+public interface RegistrationRepository extends JpaRepository<Registration, Long> {
     Student findByStudent(Student student);
     CourseOffering findByCourseOffering(CourseOffering courseOffering);
 

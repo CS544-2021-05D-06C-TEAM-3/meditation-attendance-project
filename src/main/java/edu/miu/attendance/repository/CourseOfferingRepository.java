@@ -9,7 +9,7 @@ import edu.miu.attendance.domain.CourseOffering;
 
 import java.util.List;
 
-public interface CourseOfferingRepository extends JpaRepository<CourseOffering, String> {
+public interface CourseOfferingRepository extends JpaRepository<CourseOffering, Long> {
 
     List<CourseOffering> findCourseOfferingByFaculty(Faculty faculty);
     List<CourseOffering> findCourseOfferingByStudent(Student student);

@@ -6,6 +6,6 @@ import edu.miu.attendance.domain.Person;
 
 import java.util.Optional;
 
-public interface PersonRepository extends JpaRepository<Person, String> {
+public interface PersonRepository extends JpaRepository<Person, Long> {
     Optional<Person> findByUsername(String userName);
 }
