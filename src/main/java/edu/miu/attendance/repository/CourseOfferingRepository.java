@@ -1,9 +1,14 @@
 package edu.miu.attendance.repository;
 
+import edu.miu.attendance.domain.Course;
+import edu.miu.attendance.domain.Faculty;
+import edu.miu.attendance.domain.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import edu.miu.attendance.domain.CourseOffering;
 
-public interface CourseOfferingRepository extends JpaRepository<CourseOffering, String> {
+import java.util.List;
+
+public interface CourseOfferingRepository extends JpaRepository<CourseOffering, Long> {
 
 }

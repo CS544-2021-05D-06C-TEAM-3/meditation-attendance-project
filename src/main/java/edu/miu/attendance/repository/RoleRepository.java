@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import edu.miu.attendance.domain.Role;
 
-public interface RoleRepository extends JpaRepository<Role, String> {
+import java.util.Optional;
 
+public interface RoleRepository extends JpaRepository<Role, Long> {
+
+    Optional<Role> findRoleByRole(String role);
 }
