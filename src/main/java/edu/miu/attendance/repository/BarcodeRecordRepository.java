@@ -11,6 +11,6 @@ import java.util.List;
 public interface BarcodeRecordRepository extends JpaRepository<BarcodeRecord,Long> {
 
     List<BarcodeRecord> findAllByStudent(Student student);
-    List<Location> findAllByLocation(Location location);
+
 
 }

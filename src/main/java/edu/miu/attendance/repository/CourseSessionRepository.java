@@ -1,11 +1,11 @@
 package edu.miu.attendance.repository;
 
 import edu.miu.attendance.domain.CourseOffering;
-import edu.miu.attendance.domain.TimeSlot;
+import edu.miu.attendance.domain.CourseSession;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import edu.miu.attendance.domain.CourseSession;
+import java.util.List;
 
 public interface CourseSessionRepository extends JpaRepository<CourseSession, Long> {
-    CourseOffering findByCourseOffering(CourseOffering courseOffering);
+    List<CourseSession> findAllByCourseOffering(CourseOffering courseOffering);
 }

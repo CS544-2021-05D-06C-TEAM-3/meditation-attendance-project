@@ -17,6 +17,6 @@ public class Registration {
     @ManyToOne
     private Student student;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private CourseOffering courseOffering;
 }
