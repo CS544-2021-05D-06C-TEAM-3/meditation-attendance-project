@@ -19,6 +19,9 @@ public class CourseSession {
     private LocalDate date;
     @ManyToOne
     private CourseOffering courseOffering;
+
+    @ManyToOne
+    private TimeSlot timeSlot;
     @OneToMany
     private List<Location> locationList = new ArrayList<Location>();
 }
