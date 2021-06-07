@@ -2,6 +2,7 @@ package edu.miu.attendance.service.implementation;
 
 import edu.miu.attendance.domain.BarcodeRecord;
 import edu.miu.attendance.domain.Student;
+
 import edu.miu.attendance.model.BarcodeRequest;
 import edu.miu.attendance.repository.BarcodeRecordRepository;
 import edu.miu.attendance.service.BarcodeRecordService;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 @Service
 @Transactional
 public class BarcodeRecordServiceImpl implements BarcodeRecordService {
+
 
     @Autowired
     BarcodeRecordRepository barcodeRecordDAO;
@@ -32,4 +34,11 @@ public class BarcodeRecordServiceImpl implements BarcodeRecordService {
         newBarcodeRecord.setDate(LocalDate.now());
         return barcodeRecordDAO.save(newBarcodeRecord);
     }
+
+    @Override
+    public void deleteBarcodeRecord(BarcodeRecord barcodeRecord) {
+        barcodeRecordDAO.delete(barcodeRecord);
+    }
+
+
 }

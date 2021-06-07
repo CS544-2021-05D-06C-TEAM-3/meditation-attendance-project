@@ -21,4 +21,5 @@ public interface StudentService {
     List<CourseOffering> getAllCourseOfferingsForStudent(long id);
 
     List<BarcodeRecord> getAllBarcodeRecordForStudentByCourseOffering(long courseOfferingId, long studentId);
+
 }
