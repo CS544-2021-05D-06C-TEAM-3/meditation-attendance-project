@@ -1,6 +1,7 @@
 package edu.miu.attendance.service.implementation;
 
 import edu.miu.attendance.domain.BarcodeRecord;
+import edu.miu.attendance.domain.Student;
 import edu.miu.attendance.repository.BarcodeRecordRepository;
 import edu.miu.attendance.service.BarcodeRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import javax.transaction.Transactional;
 @Transactional
 public class BarcodeRecordServiceImpl implements BarcodeRecordService {
 
+
     @Autowired
     BarcodeRecordRepository barcodeRecordDAO;
 
@@ -19,4 +21,11 @@ public class BarcodeRecordServiceImpl implements BarcodeRecordService {
     public BarcodeRecord addBarcodeRecord(BarcodeRecord barcodeRecord) {
         return barcodeRecordDAO.save(barcodeRecord);
     }
+
+    @Override
+    public void deleteBarcodeRecord(BarcodeRecord barcodeRecord) {
+        barcodeRecordDAO.delete(barcodeRecord);
+    }
+
+
 }
