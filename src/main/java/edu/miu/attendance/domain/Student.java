@@ -1,5 +1,6 @@
 package edu.miu.attendance.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,9 +13,9 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Student extends Person{
     private String barcode;
-    private String attendanceStatus;
     private LocalDate entry;
     @OneToMany
     private List<Registration> registrationList = new ArrayList<Registration>();
