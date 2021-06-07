@@ -1,6 +1,8 @@
 package edu.miu.attendance.service;
 
+import edu.miu.attendance.domain.BarcodeRecord;
 import edu.miu.attendance.domain.Course;
+import edu.miu.attendance.domain.CourseOffering;
 import edu.miu.attendance.domain.Student;
 import edu.miu.attendance.model.StudentRequest;
 
@@ -15,4 +17,8 @@ public interface StudentService {
     void deleteStudentById(long id);
 
     List<Course> getAllCoursesByStudent(long id);
+
+    List<CourseOffering> getAllCourseOfferingsForStudent(long id);
+
+    List<BarcodeRecord> getAllBarcodeRecordForStudentByCourseOffering(long courseOfferingId, long studentId);
 }

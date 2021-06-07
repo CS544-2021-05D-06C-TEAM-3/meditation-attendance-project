@@ -41,8 +41,9 @@ public class StudentController {
         return barcodeRecordService.addBarcodeRecord(id, barcodeRequest);
     }
 
-//    @GetMapping("student/{id}/attendances")
-//    public List<BarcodeRecord> getAttendanceForStudent(@PathVariable long id){
-//
-//    }
+    @GetMapping("student/{studentId}/courseOffering/{courseOfferingId}/barcodeRecords")
+    public List<BarcodeRecord> getAttendanceForStudent(@PathVariable long studentId, @PathVariable long courseOfferingId){
+        return studentService.getAllBarcodeRecordForStudentByCourseOffering(courseOfferingId,studentId);
+
+    }
 }
