@@ -34,10 +34,10 @@ public class FacultyController {
     @Autowired
     private BarcodeRecordService barcodeRecordService;
 
-    @GetMapping("/faculty/{studentId}")
-    public Student getStudentById(@PathVariable long studentId) {
-        return studentService.getStudentById(studentId);
-    }
+//    @GetMapping("/faculty/{studentId}")
+//    public Student getStudentById(@PathVariable long studentId) {
+//        return studentService.getStudentById(studentId);
+//    }
 
     @GetMapping("/faculty/{id}/courses")
     public List<Course> getCoursesForFaculty(@PathVariable long id) {
@@ -49,10 +49,10 @@ public class FacultyController {
         return facultyService.getAllStudentForFaculty(id);
     }
 
-    @PutMapping("/faculty/{studentId}/{status}")
-    public void changeStudentAttendanceStatus(@PathVariable long studentId, @PathVariable String status) {
-         facultyService.changeStudentAttendanceStatus(studentId,status);
-    }
+//    @PutMapping("/faculty/{studentId}/{status}")
+//    public void changeStudentAttendanceStatus(@PathVariable long studentId, @PathVariable String status) {
+//         facultyService.changeStudentAttendanceStatus(studentId,status);
+//    }
 
 
 
