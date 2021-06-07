@@ -68,10 +68,10 @@ public class FacultyServiceImpl implements FacultyService {
         return courseOfferingRepository.getCourseOfferingsByFaculty(faculty);
     }
 
-    @Override
-    public void changeStudentAttendanceStatus(long id, String status) {
-        Student student = studentService.getStudentById(id);
-        studentService.changeStudentAttendanceStatus(student,status);
-
-    }
+//    @Override
+//    public void changeStudentAttendanceStatus(long id, String status) {
+//        Student student = studentService.getStudentById(id);
+//        studentService.changeStudentAttendanceStatus(student,status);
+//
+//    }
 }

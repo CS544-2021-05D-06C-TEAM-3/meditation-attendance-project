@@ -19,6 +19,6 @@ public interface FacultyService {
 
     List<CourseOffering> findCourseOfferingByFaculty(long id);
 
-    void changeStudentAttendanceStatus(long id, String status);
+//    void changeStudentAttendanceStatus(long id, String status);
 
 }
