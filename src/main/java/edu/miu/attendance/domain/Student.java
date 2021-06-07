@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Student extends Person{
     private String barcode;
+    private String attendanceStatus;
     private LocalDate entry;
     @OneToMany
     private List<Registration> registrationList = new ArrayList<Registration>();

@@ -1,8 +1,10 @@
 package edu.miu.attendance.service;
 
 import edu.miu.attendance.domain.BarcodeRecord;
+import edu.miu.attendance.model.BarcodeRequest;
 
 public interface BarcodeRecordService {
 
-    BarcodeRecord addBarcodeRecord(BarcodeRecord barcodeRecord);
+    BarcodeRecord addBarcodeRecord(long id, BarcodeRequest barcodeRecord);
+
 }
