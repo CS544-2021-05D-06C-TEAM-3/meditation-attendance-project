@@ -1,6 +1,6 @@
 package edu.miu.attendance.config;
 
-import edu.miu.attendance.security.JwtRequestFilter;
+//import edu.miu.attendance.security.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .ignoringAntMatchers("/h2-console/**") //don't apply CSRF protection to /h2-console
                 .and()
                     .exceptionHandling()
-                    .accessDeniedPage("/error/access-denied")
+                    .accessDeniedPage("/access-denied")
         //.and()
         //.sessionManagement()
         //.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
