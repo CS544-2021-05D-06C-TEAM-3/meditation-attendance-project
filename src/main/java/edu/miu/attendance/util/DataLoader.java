@@ -74,14 +74,14 @@ public class DataLoader implements CommandLineRunner {
         student.setBarcode("abc223");
 
         Student student1 = new Student();
-        student1.setFirstName("rick");
-        student1.setLastName("marty");
-        student1.setEmail("blen@gmail.com");
-        student1.setUsername("blen");
-        student1.setPassword("test");
+        student1.setFirstName("Mohammed");
+        student1.setLastName("ALDINI");
+        student1.setEmail("mhaldini@miu.edu");
+        student1.setUsername("maldini");
+        student1.setPassword("123456");
         student1.setEntry(LocalDate.now());
-        student1.setBarcode("abc223");
-
+        student1.setBarcode("611930");
+        student1.setRoleList();
         studentDAO.saveAll(Arrays.asList(student, student1));
         System.out.println(studentDAO.findAll().toString());
     }

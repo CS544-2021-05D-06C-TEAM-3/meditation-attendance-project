@@ -34,7 +34,7 @@ public class AuthenticationController {
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
             );
         } catch (Exception ex) {
-            return ResponseEntity.badRequest().body(new BadCredentialDto("MIU: Invalid username and password"));
+            return ResponseEntity.badRequest().body(new BadCredentialDto("Invalid username and password"));
         }
         UserDetails userDetails = personDetailsService.loadUserByUsername(loginRequest.getUsername());
         UserDataDto userData = new UserDataDto((JPAPersonDetails) userDetails);

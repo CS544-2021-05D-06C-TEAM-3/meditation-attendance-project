@@ -94,20 +94,6 @@ public class RequestHandlerError {
     }
 
     @Getter
-    @Setter
-    @AllArgsConstructor
-    private class VinIdAlreadyExistDto {
-        private String vinId;
-    }
-
-    @Getter
-    @Setter
-    @AllArgsConstructor
-    public class UserAlreadyExistDto{
-        private String email;
-    }
-
-    @Getter
     class AccessDeniedExeptionDto {
         private String error = "Access denied exception";
     }
