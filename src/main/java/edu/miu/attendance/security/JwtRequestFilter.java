@@ -17,6 +17,11 @@ import java.io.IOException;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
+    public static final String SECRET = "SECRET_KEY";
+    public static final long EXPIRATION_TIME = 900_000; // 15 mins
+    public static final String TOKEN_PREFIX = "Bearer ";
+    public static final String HEADER_STRING = "Authorization";
+
     @Autowired
     JwtUtil jwtUtil;
 
@@ -27,11 +32,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-        String authorization = request.getHeader("Authorization");
+        String authorization = request.getHeader(HEADER_STRING);
         String username = null;
         String token = null;
 
-        if (authorization != null && authorization.startsWith("Bearer ")) {
+        if (authorization != null && authorization.startsWith(TOKEN_PREFIX)) {
             token = authorization.substring(7);
             username = jwtUtil.getUsernameFromToken(token);
         }
@@ -46,7 +51,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
         }
-
         filterChain.doFilter(request, response);
     }
 }

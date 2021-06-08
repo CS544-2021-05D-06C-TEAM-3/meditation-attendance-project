@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>:: Meditation Attendance Project ::</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="undefined" crossorigin="anonymous">
@@ -19,11 +18,11 @@
         </div>
         <div class="form-group">
             <span></span>
-            <input name="username" type="text" class="form-control mb-2" id="email" th:placeholder="Username" autofocus="true" />
-            <input type="password" th:placeholder="Password" id="password" name="password" class="form-control" />
+            <input type="text" class="form-control mb-2" name="username" th:placeholder="Username" autofocus="true" />
+            <input type="password" th:placeholder="Password" name="password" class="form-control" />
             <span></span>
-
             <button class="btn btn-outline-primary btn-block w-100" name="Submit" value="Login" type="Submit" th:text="Login"></button>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         </div>
     </form>
 </div>
