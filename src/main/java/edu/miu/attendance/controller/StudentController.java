@@ -10,6 +10,7 @@ import edu.miu.attendance.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -33,7 +34,7 @@ public class StudentController {
     }
 
     @PostMapping("students/register")
-    public Student registerStudent(@RequestBody StudentRequest studentRequest) {
+    public Student registerStudent(@Valid @RequestBody StudentRequest studentRequest) {
         return studentService.registerStudent(studentRequest);
     }
 

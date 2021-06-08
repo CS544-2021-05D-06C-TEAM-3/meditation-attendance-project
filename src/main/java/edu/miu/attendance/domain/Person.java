@@ -2,9 +2,13 @@ package edu.miu.attendance.domain;
 
 import lombok.*;
 import org.apache.commons.lang3.builder.ToStringExclude;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,16 +24,32 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotBlank
+    @Size(min=3, max=15)
     @Column(name = "first_name",nullable = false, length = 255)
     private String firstName;
+
+    @NotBlank
+    @Size(min=3, max=15)
     @Column(name = "last_name",nullable = false, length = 255)
     private String lastName;
+
+    @NotBlank
+    @Email
     @Column(name = "email")
     private String email;
+
+    @NotBlank
+    @Size(min=3, max=15)
     @Column(name = "username")
     private String username;//student ID
+
+    @NotBlank
+    @Size(min=3, max=15)
     @Column(name = "password")
     private String password;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @ToStringExclude
     private Set<Role> roleList = new HashSet<>();
