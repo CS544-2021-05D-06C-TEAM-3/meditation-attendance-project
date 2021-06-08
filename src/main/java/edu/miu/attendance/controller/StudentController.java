@@ -21,14 +21,19 @@ public class StudentController {
     @Autowired
     BarcodeRecordService barcodeRecordService;
 
-    @PostMapping("students/register")
-    public Student registerStudent(@RequestBody StudentRequest studentRequest) {
-        return studentService.registerStudent(studentRequest);
-    }
 
     @GetMapping("students/{id}")
     public Student getStudentById(@PathVariable long id) {
         return studentService.findStudentById(id);
+    }
+
+    @GetMapping("students")
+    public List<Student> getAllStudents(){
+        return studentService.getAllStudent();
+    }
+    @PostMapping("students/register")
+    public Student registerStudent(@RequestBody StudentRequest studentRequest) {
+        return studentService.registerStudent(studentRequest);
     }
 
     @GetMapping("students/{id}/courses")
