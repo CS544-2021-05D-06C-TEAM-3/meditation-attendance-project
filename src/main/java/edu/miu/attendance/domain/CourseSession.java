@@ -22,6 +22,12 @@ public class CourseSession {
 
     @ManyToOne
     private TimeSlot timeSlot;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Location> locationList = new ArrayList<Location>();
+
+    public CourseSession(LocalDate date, CourseOffering courseOffering,TimeSlot timeSlot) {
+        this.date = date;
+        this.courseOffering = courseOffering;
+        this.timeSlot = timeSlot;
+    }
 }
