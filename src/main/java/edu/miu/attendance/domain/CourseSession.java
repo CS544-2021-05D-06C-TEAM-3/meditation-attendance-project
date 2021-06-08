@@ -13,15 +13,19 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name="session")
 public class CourseSession {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private LocalDate date;
+
     @ManyToOne
     private CourseOffering courseOffering;
 
     @ManyToOne
     private TimeSlot timeSlot;
+
     @OneToMany(fetch = FetchType.EAGER)
     private List<Location> locationList = new ArrayList<Location>();
 

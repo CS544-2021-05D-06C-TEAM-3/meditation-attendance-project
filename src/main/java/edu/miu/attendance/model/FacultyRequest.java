@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class FacultyRequest {
+
     String firstName;
     String lastName;
     String position;

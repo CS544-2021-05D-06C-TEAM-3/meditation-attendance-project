@@ -15,7 +15,9 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class Faculty extends Person {
+
     private String position;
+
     @OneToMany(mappedBy = "faculty", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @ToStringExclude
     private List<CourseOffering> courseOfferingList = new ArrayList<CourseOffering>();

@@ -1,6 +1,7 @@
 package edu.miu.attendance.model;
 
 import lombok.Data;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 

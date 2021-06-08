@@ -14,11 +14,15 @@ public class BarcodeRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private LocalDate date;
+
     @ManyToOne
     private Student student;
+
     @ManyToOne
     private Location location;
+
     @ManyToOne
     private TimeSlot timeSlot;
 }

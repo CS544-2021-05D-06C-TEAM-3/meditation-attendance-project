@@ -19,6 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Student extends Person{
+
     private String barcode;
     private LocalDate entry;
 
