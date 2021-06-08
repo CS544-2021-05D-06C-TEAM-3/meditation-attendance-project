@@ -1,28 +1,21 @@
 package edu.miu.attendance.controller;
 
 import edu.miu.attendance.config.JPAPersonDetailsService;
-import edu.miu.attendance.dto.JwtRequest;
-import edu.miu.attendance.repository.PersonRepository;
-import edu.miu.attendance.security.JwtResponse;
 import edu.miu.attendance.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Controller
 public class TestController {
     @Autowired
     JwtUtil jwtUtils;
@@ -33,17 +26,17 @@ public class TestController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @RequestMapping("/")
+    //@RequestMapping("/")
     public String root() {
         return "redirect:/index";
     }
 
-    @RequestMapping("/index")
+    //@RequestMapping("/index")
     public String index() {
         return "index.html";
     }
 
-    @RequestMapping("/login")
+    //@RequestMapping("/login")
     public String loginPage(@RequestParam(value = "error", required = false) String error, Model model) {
         boolean error_status = (error != null?true:false);
         //System.out.println("Error: "+error);
@@ -72,7 +65,7 @@ public class TestController {
         }
     }
 
-    @RequestMapping(value="/logout", method = RequestMethod.GET)
+    //@RequestMapping(value="/logout", method = RequestMethod.GET)
     public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null){
@@ -80,9 +73,8 @@ public class TestController {
         }
         return "redirect:/login?logout=true";
     }
-    @RequestMapping(value = "/access-denied", method = RequestMethod.GET)
+    //@RequestMapping(value = "/access-denied", method = RequestMethod.GET)
     public String accessDenied() {
         return "403.html";
     }
-
 }

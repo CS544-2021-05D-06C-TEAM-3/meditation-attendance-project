@@ -102,8 +102,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // configure AuthenticationManager so that it knows from where to load
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
-    /*auth.inMemoryAuthentication()
-            .withUser("user").password("password").roles("STUDENT")
-            .and()
-            .withUser("admin").password("password").roles("FACULTY");*/
 }
