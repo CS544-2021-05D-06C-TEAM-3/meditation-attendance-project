@@ -65,8 +65,8 @@ public class DataLoader implements CommandLineRunner {
 
     private void createStudents(){
         Student student = new Student();
-        student.setFirstName("blen");
-        student.setLastName("aklilu");
+        student.setFirstName("bojack");
+        student.setLastName("horseman");
         student.setEmail("blen@gmail.com");
         student.setUsername("blen");
         student.setPassword("test");
@@ -74,8 +74,8 @@ public class DataLoader implements CommandLineRunner {
         student.setBarcode("abc223");
 
         Student student1 = new Student();
-        student1.setFirstName("blen");
-        student1.setLastName("aklilu");
+        student1.setFirstName("rick");
+        student1.setLastName("marty");
         student1.setEmail("blen@gmail.com");
         student1.setUsername("blen");
         student1.setPassword("test");

@@ -22,15 +22,16 @@ public class StudentController {
     BarcodeRecordService barcodeRecordService;
 
 
+    @GetMapping("students")
+    public List<Student> getAllStudents() {
+        return studentService.getAllStudent();
+    }
+
     @GetMapping("students/{id}")
     public Student getStudentById(@PathVariable long id) {
         return studentService.findStudentById(id);
     }
 
-    @GetMapping("students")
-    public List<Student> getAllStudents(){
-        return studentService.getAllStudent();
-    }
     @PostMapping("students/register")
     public Student registerStudent(@RequestBody StudentRequest studentRequest) {
         return studentService.registerStudent(studentRequest);
@@ -47,8 +48,8 @@ public class StudentController {
     }
 
     @GetMapping("student/{studentId}/courseOffering/{courseOfferingId}/barcodeRecords")
-    public List<BarcodeRecord> getAttendanceForStudent(@PathVariable long studentId, @PathVariable long courseOfferingId){
-        return studentService.getAllBarcodeRecordForStudentByCourseOffering(courseOfferingId,studentId);
+    public List<BarcodeRecord> getAttendanceForStudent(@PathVariable long studentId, @PathVariable long courseOfferingId) {
+        return studentService.getAllBarcodeRecordForStudentByCourseOffering(courseOfferingId, studentId);
 
     }
 }
