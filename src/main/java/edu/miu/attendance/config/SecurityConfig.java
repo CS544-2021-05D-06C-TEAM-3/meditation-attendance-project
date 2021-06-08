@@ -17,15 +17,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
-@Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     @Qualifier("JPAPersonDetailsService")
@@ -41,10 +35,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // Enable CORS and disable CSRF
-        http = http.cors().and().csrf().disable();
-
         http.authorizeRequests()
+                .antMatchers("/authenticate/*").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
+                .anyRequest().authenticated()
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http.addFilterAfter(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        //Those two settings below is to enable access h2 database via browser
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
+        /*http.authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/", "/index", "/login").permitAll()
                 .antMatchers("/admin/**").hasAuthority("ROLE_FACULTY")
@@ -73,11 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     .csrf().disable()
                     .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-        ;
-        //http.addFilterAfter(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-        //Those two settings below is to enable access h2 database via browser
-        //http.csrf().disable();
-        //http.headers().frameOptions().disable();
+        ;*/
     }
 
     @Bean
@@ -89,17 +86,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
-    }
-
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
-    }
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        // configure AuthenticationManager so that it knows from where to load
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 }
