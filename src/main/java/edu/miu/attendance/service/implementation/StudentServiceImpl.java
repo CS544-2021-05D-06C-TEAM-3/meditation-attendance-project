@@ -39,7 +39,14 @@ public class StudentServiceImpl implements StudentService {
         newStudent.setEmail(student.getEmail());
         newStudent.setEntry(student.getEntry());
         newStudent.setBarcode(student.getBarcode());
+        newStudent.setUsername(student.getUsername());
+        newStudent.setPassword(student.getPassword());
         return studentDAO.save(newStudent);
+    }
+
+    @Override
+    public List<Student> getAllStudent() {
+        return studentDAO.findAll();
     }
 
     @Override

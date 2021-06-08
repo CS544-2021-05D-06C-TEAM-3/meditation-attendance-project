@@ -12,6 +12,8 @@ public interface StudentService {
 
     Student registerStudent(StudentRequest student);
 
+    List<Student> getAllStudent();
+
     Student findStudentById(long id);
 
     void deleteStudentById(long id);
