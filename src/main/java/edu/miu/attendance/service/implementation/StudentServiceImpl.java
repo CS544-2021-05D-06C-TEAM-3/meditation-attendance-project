@@ -78,10 +78,16 @@ public class StudentServiceImpl implements StudentService {
         CourseOffering courseOffering = courseOfferingService.getCourseOfferingById(courseOfferingId);
         Student student = findStudentById(studentId);
         List<BarcodeRecord> barcodeRecords = barcodeRecordDAO.findAllByStudent(student);
-        barcodeRecords.stream()
-                .filter(barcodeRecord -> barcodeRecord.getDate().isBefore(courseOffering.getEnd_date())
-                        && barcodeRecord.getDate().isAfter(courseOffering.getStart_date()));
 
-        return barcodeRecords;
+
+        return barcodeRecords.stream()
+                .filter(barcodeRecord -> barcodeRecord.getDate().isBefore(courseOffering.getEnd_date())
+                        && barcodeRecord.getDate().isAfter(courseOffering.getStart_date())).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BarcodeRecord> getAllBarcodeRecordForStudent(long id) {
+        Student student = findStudentById(id);
+        return barcodeRecordDAO.findAllByStudent(student);
     }
 }
