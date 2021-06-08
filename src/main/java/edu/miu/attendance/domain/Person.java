@@ -1,12 +1,11 @@
 package edu.miu.attendance.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.apache.commons.lang3.builder.ToStringExclude;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,6 +13,7 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Table(name="person")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
@@ -27,6 +27,15 @@ public class Person {
     private String email;
     private String username;//student ID
     private String password;
-    @ManyToMany
-    private Set<Role> roleList;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @ToStringExclude
+    private Set<Role> roleList = new HashSet<>();
+
+    public Person(String firstName, String lastName, String email, String username, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
 }
