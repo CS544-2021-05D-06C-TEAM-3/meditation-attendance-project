@@ -18,8 +18,6 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Autowired
     RegistrationRepository registrationDAO;
 
-
-
     @Override
     public Registration register(Registration registration) {
         return registrationDAO.save(registration);
@@ -30,8 +28,10 @@ public class RegistrationServiceImpl implements RegistrationService {
         return null;
     }
 
-    /*@Override
-    public List<Registration> getAllRegistrationByCourseOffering(CourseOffering courseOffering) {
-
-    }*/
+    /*
+     * @Override public List<Registration>
+     * getAllRegistrationByCourseOffering(CourseOffering courseOffering) {
+     * 
+     * }
+     */
 }
