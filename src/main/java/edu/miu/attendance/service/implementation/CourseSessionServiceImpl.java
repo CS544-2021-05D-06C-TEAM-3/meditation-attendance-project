@@ -22,7 +22,7 @@ public class CourseSessionServiceImpl implements CourseSessionService {
 
     @Override
     public CourseSession findCourseSessionById(long id) {
-        return courseSessionDAO.findById(id).orElseThrow();
+        return courseSessionDAO.findById(id).get();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package edu.miu.attendance.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -16,6 +17,7 @@ import java.util.Set;
 @Data
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 public class Student extends Person{
     private String barcode;
     private LocalDate entry;

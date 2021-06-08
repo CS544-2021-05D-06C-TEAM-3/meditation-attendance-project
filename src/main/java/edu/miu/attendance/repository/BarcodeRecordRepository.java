@@ -12,5 +12,7 @@ public interface BarcodeRecordRepository extends JpaRepository<BarcodeRecord,Lon
 
     List<BarcodeRecord> findAllByStudent(Student student);
 
+    BarcodeRecord findFirstByStudent(Student student);
+
 
 }
