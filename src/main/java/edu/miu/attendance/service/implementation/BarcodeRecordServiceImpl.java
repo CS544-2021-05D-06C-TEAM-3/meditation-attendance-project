@@ -35,10 +35,5 @@ public class BarcodeRecordServiceImpl implements BarcodeRecordService {
         return barcodeRecordDAO.save(newBarcodeRecord);
     }
 
-    @Override
-    public void deleteBarcodeRecord(BarcodeRecord barcodeRecord) {
-        barcodeRecordDAO.delete(barcodeRecord);
-    }
-
 
 }

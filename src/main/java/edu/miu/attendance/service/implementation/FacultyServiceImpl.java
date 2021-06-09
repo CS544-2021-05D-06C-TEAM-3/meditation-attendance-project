@@ -1,9 +1,11 @@
 package edu.miu.attendance.service.implementation;
 
 import edu.miu.attendance.domain.*;
+import edu.miu.attendance.repository.BarcodeRecordRepository;
 import edu.miu.attendance.repository.CourseOfferingRepository;
 import edu.miu.attendance.repository.FacultyRepository;
 import edu.miu.attendance.repository.RegistrationRepository;
+import edu.miu.attendance.service.CourseOfferingService;
 import edu.miu.attendance.service.FacultyService;
 import edu.miu.attendance.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,45 +21,43 @@ import java.util.stream.Collectors;
 public class FacultyServiceImpl implements FacultyService {
 
     @Autowired
-    FacultyRepository facultyRepository;
-    @Autowired
-    CourseOfferingRepository courseOfferingRepository;
+    FacultyRepository facultyDAO;
 
     @Autowired
-    RegistrationRepository registrationRepository;
+    CourseOfferingRepository courseOfferingDAO;
+
+    @Autowired
+    CourseOfferingService courseOfferingService;
+
+    @Autowired
+    RegistrationRepository registrationDAO;
+
+    @Autowired
+    BarcodeRecordRepository barcodeRecordDAO;
+
     @Autowired
     StudentService studentService;
-    @Override
-    public Faculty getFacultyByUsername(String username) {
-        return facultyRepository.findByUsername(username);
-    }
+
 
     @Override
     public Faculty getFacultyById(long id) {
-        return facultyRepository.findById(id).get();
+        return facultyDAO.findById(id).get();
     }
 
     @Override
-    public List<Student> getAllStudentForFaculty(long id) {
-        List<Student> studentList=new ArrayList<>();
-        List<Registration> registrationList=new ArrayList<>();
-        List<CourseOffering> courseOfferingList= findCourseOfferingByFaculty(id);
+    public List<Student> getAllStudentForFaculty(long courseOfferingId) {
+        CourseOffering courseOffering = courseOfferingService.getCourseOfferingById(courseOfferingId);
+        return registrationDAO.findAllRegistrationByCourseOffering(courseOffering)
+                .stream()
+                .map(registration -> registration.getStudent()).collect(Collectors.toList());
 
-        for(CourseOffering courseOffering:courseOfferingList){
-            for (Registration registration:courseOffering.getRegistrations()){
-                registrationList.add(registration);
-            }
-        }
-        for (Registration registration:registrationList){
-            studentList.add(registration.getStudent());
-        }
-        return studentList;
     }
 
     @Override
     public List<Course> findCoursesByFaculty(long id) {
+        //TODO add filter six months
         Faculty faculty = getFacultyById(id);
-        return courseOfferingRepository.getCourseOfferingsByFaculty(faculty)
+        return courseOfferingDAO.getCourseOfferingsByFaculty(faculty)
                 .stream()
                 .map(courseOffering -> courseOffering.getCourse()).collect(Collectors.toList());
     }
@@ -65,13 +65,42 @@ public class FacultyServiceImpl implements FacultyService {
     @Override
     public List<CourseOffering> findCourseOfferingByFaculty(long id) {
         Faculty faculty = getFacultyById(id);
-        return courseOfferingRepository.getCourseOfferingsByFaculty(faculty);
+        return courseOfferingDAO.getCourseOfferingsByFaculty(faculty);
     }
 
     @Override
-    public void changeStudentAttendanceStatus(long id, String status) {
-        Student student = studentService.getStudentById(id);
-        studentService.changeStudentAttendanceStatus(student,status);
+    public List<BarcodeRecord> getBarcodeRecordsByCourseOfferingForFaculty(long courseOfferingId, long studentId) {
+        CourseOffering courseOffering = courseOfferingService.getCourseOfferingById(courseOfferingId);
+        Student student = studentService.findStudentById(studentId);
+        List<BarcodeRecord> barcodeRecords = barcodeRecordDAO.findAllByStudent(student);
 
+        return barcodeRecords.stream()
+                .filter(barcodeRecord -> barcodeRecord.getDate().isBefore(courseOffering.getEnd_date())
+                        && barcodeRecord.getDate().isAfter(courseOffering.getStart_date())).collect(Collectors.toList());
     }
+
+    @Override
+    public void changeBarcodeAttendanceStatus(long courseOffId,long StdId, String status) {
+        //need to add time slot to set student absent in one record
+        CourseOffering courseOffering = courseOfferingService.getCourseOfferingById(courseOffId);
+        List<CourseSession> courseSessionList=courseOffering.getCourseSessions();
+
+        List<BarcodeRecord> barcodeRecords=getBarcodeRecordsByCourseOfferingForFaculty(courseOffId, StdId);
+        List<BarcodeRecord> barcodeRecordToChange=new ArrayList<>();
+
+        for (CourseSession courseSession:courseSessionList){
+            barcodeRecordToChange=barcodeRecords.stream()
+                    .filter(barcodeRecord -> barcodeRecord.getDate().isBefore(courseSession.getTimeSlot().getBeginTime().toLocalDate())
+                            && barcodeRecord.getDate().isAfter(courseSession.getTimeSlot().getEndTime().toLocalDate())).collect(Collectors.toList());
+        }
+        while (!barcodeRecordToChange.isEmpty()){
+            for (BarcodeRecord barcodeRecord:barcodeRecordToChange){
+                barcodeRecord.setAttendanceStatus(status);
+            }
+        }
+    }
+
+
+
+
 }

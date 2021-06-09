@@ -15,6 +15,7 @@ public class BarcodeRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private LocalDate date;
+    private String attendanceStatus;
     @ManyToOne
     private Student student;
     @ManyToOne

@@ -1,24 +1,22 @@
 package edu.miu.attendance.service;
 
-import edu.miu.attendance.domain.Course;
-import edu.miu.attendance.domain.CourseOffering;
-import edu.miu.attendance.domain.Faculty;
-import edu.miu.attendance.domain.Student;
+import edu.miu.attendance.domain.*;
 
 import java.util.List;
 
 
 public interface FacultyService {
 
-    Faculty getFacultyByUsername(String username) ;
     Faculty getFacultyById(long id);
 
-    List<Student> getAllStudentForFaculty(long id);
+    List<Student> getAllStudentForFaculty(long courseOfferingId);
 
     List<Course> findCoursesByFaculty(long id);
 
     List<CourseOffering> findCourseOfferingByFaculty(long id);
 
-    void changeStudentAttendanceStatus(long id, String status);
+    List<BarcodeRecord> getBarcodeRecordsByCourseOfferingForFaculty(long courseOfferingId, long studentId);
+
+    void changeBarcodeAttendanceStatus(long courseOffId,long id, String status);
 
 }
