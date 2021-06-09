@@ -56,8 +56,7 @@ public class DataLoader implements CommandLineRunner {
         Role roleAdmin = new Role(1,"ROLE_ADMIN");
         Role rolePERSONNEL = new Role(2,"ROLE_PERSONNEL");
         Role roleSTUDENT = new Role(3,"ROLE_STUDENT");
-        Role roleFACULTY = new Role(3,"ROLE_FACULTY");
-
+        Role roleFACULTY = new Role(4,"ROLE_FACULTY");
 
         roleDAO.saveAll(Arrays.asList(roleAdmin, rolePERSONNEL, roleSTUDENT,roleFACULTY));
         System.out.println(roleDAO.findAll().toString());
@@ -74,14 +73,14 @@ public class DataLoader implements CommandLineRunner {
         student.setBarcode("abc223");
 
         Student student1 = new Student();
-        student1.setFirstName("rick");
-        student1.setLastName("marty");
-        student1.setEmail("blen@gmail.com");
-        student1.setUsername("blen");
-        student1.setPassword("test");
+        student1.setFirstName("Mohammed");
+        student1.setLastName("ALDINI");
+        student1.setEmail("mhaldini@miu.edu");
+        student1.setUsername("maldini");
+        student1.setPassword("$2a$10$XaAMek3HlCKIXcdz9Jow5.xV4HAfauFSALmOc/erTZWSentRJ9TIK");//123
         student1.setEntry(LocalDate.now());
-        student1.setBarcode("abc223");
-
+        student1.setBarcode("611930");
+        //student1.setRoleList();
         studentDAO.saveAll(Arrays.asList(student, student1));
         System.out.println(studentDAO.findAll().toString());
     }
