@@ -31,7 +31,8 @@ public class BarcodeRecordServiceImpl implements BarcodeRecordService {
         newBarcodeRecord.setStudent(student);
         newBarcodeRecord.setLocation(barcode.getLocation());
         newBarcodeRecord.setTimeSlot(barcode.getSlot());
-        newBarcodeRecord.setDate(LocalDate.now());
+        newBarcodeRecord.setDate(barcode.getDate());
+        System.out.println("location" + barcode.getLocation());
         return barcodeRecordDAO.save(newBarcodeRecord);
     }
 

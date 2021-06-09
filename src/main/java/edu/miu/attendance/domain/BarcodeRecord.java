@@ -17,8 +17,9 @@ public class BarcodeRecord {
     private LocalDate date;
     @ManyToOne
     private Student student;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Location location;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private TimeSlot timeSlot;
 }
