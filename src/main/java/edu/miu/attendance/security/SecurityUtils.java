@@ -8,9 +8,4 @@ public class SecurityUtils {
         JPAPersonDetails userDetails = (JPAPersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userDetails.getUsername();
     }
-
-    public static boolean isOrganizationUser() {
-        JPAPersonDetails userDetails = (JPAPersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return userDetails.getRoles().stream().anyMatch(r -> r.getRole().equals("FACULTY"));//name for org
-    }
 }

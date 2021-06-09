@@ -20,11 +20,11 @@ public class JPAPersonDetails implements UserDetails {
 
     public JPAPersonDetails(Person person) {
         this.username = person.getUsername();
-        this.email = person.getEmail();
+        this.email    = person.getEmail();
         this.password = person.getPassword();
         this.firstName = person.getFirstName();
         this.lastName = person.getLastName();
-        this.roles =person.getRoleList();
+        this.roles    = person.getRoleList();
     }
 
     @Override
