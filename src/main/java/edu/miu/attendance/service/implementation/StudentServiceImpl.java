@@ -83,9 +83,10 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<BarcodeRecord> getAllBarcodeRecordForStudentByCourseOffering(long courseOfferingId, long studentId) {
+    public List<BarcodeRecord> getAllBarcodeRecordForStudentByCourseOffering(long courseOfferingId) {
         CourseOffering courseOffering = courseOfferingService.getCourseOfferingById(courseOfferingId);
-        Student student = findStudentById(studentId);
+        String username = SecurityUtils.getUsername();
+        Student student = findByUsername(username);
         List<BarcodeRecord> barcodeRecords = barcodeRecordDAO.findAllByStudent(student);
 
 
@@ -95,8 +96,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<BarcodeRecord> getAllBarcodeRecordForStudent(long id) {
-        Student student = findStudentById(id);
-        return barcodeRecordDAO.findAllByStudent(student);
+    public List<BarcodeRecord> getAllBarcodeRecordForStudent() {
+        String username = SecurityUtils.getUsername();
+        Student student = findByUsername(username);
+        System.out.println("username123" + username);
+        List<BarcodeRecord> barcodeRecords = barcodeRecordDAO.findAllByStudent(student);
+        return barcodeRecords;
     }
 }

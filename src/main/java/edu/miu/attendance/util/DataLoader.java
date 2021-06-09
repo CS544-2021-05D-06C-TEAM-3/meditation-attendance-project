@@ -39,6 +39,9 @@ public class DataLoader implements CommandLineRunner {
     @Autowired
     RegistrationRepository registrationDAO;
 
+    @Autowired
+    LocationRepository locationDAO;
+
     @Override
     public void run(String... args) throws Exception {
         createRoles();
@@ -48,10 +51,23 @@ public class DataLoader implements CommandLineRunner {
         createCourses();
         courseOfferings();
         createSessions();
+        createLocations();
         registerStudents();
 
 
     }
+
+    private void createLocations() {
+        Location location = new Location();
+        location.setDescription("dalby");
+
+        Location location1 = new Location();
+        location.setDescription("verill");
+
+        locationDAO.saveAll(Arrays.asList(location, location1));
+        System.out.println(locationDAO.findAll().toString());
+    }
+
     private void createRoles(){
         Role roleAdmin = new Role(1,"ROLE_ADMIN");
         Role rolePERSONNEL = new Role(2,"ROLE_PERSONNEL");

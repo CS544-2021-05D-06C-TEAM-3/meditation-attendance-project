@@ -27,35 +27,34 @@ public class StudentController {
         return studentService.getAllStudent();
     }
 
-    @GetMapping("students/{id}")
+    @GetMapping("student/{id}")
     public Student getStudentById(@PathVariable long id) {
         return studentService.findStudentById(id);
     }
 
-    @PostMapping("students/register")
+    @PostMapping("student/register")
     public Student registerStudent(@RequestBody StudentRequest studentRequest) {
         return studentService.registerStudent(studentRequest);
     }
 
-    @GetMapping("students/courses")
+    @GetMapping("student/courses")
     public List<Course> getCoursesForStudent() {
         return studentService.getAllCoursesByStudent();
     }
 
-    @PostMapping("students/{id}/checkinBarcode")
-    public BarcodeRecord addBarcodeRecord(@PathVariable long id, @RequestBody BarcodeRequest barcodeRequest) {
-        return barcodeRecordService.addBarcodeRecord(id, barcodeRequest);
+    @PostMapping("student/checkinBarcode")
+    public BarcodeRecord addBarcodeRecord(@RequestBody BarcodeRequest barcodeRequest) {
+        return barcodeRecordService.addBarcodeRecord(barcodeRequest);
     }
 
-    @GetMapping("students/{id}/barcodeRecords")
-    public List<BarcodeRecord> getAllBarcodeRecordsOfStudent(@PathVariable long id){
-        return studentService.getAllBarcodeRecordForStudent(id);
+    @GetMapping("student/barcodeRecords")
+    public List<BarcodeRecord> getAllBarcodeRecordsOfStudent(){
+        return studentService.getAllBarcodeRecordForStudent();
 
     }
-
-    @GetMapping("students/{studentId}/courseOffering/{courseOfferingId}/barcodeRecords")
-    public List<BarcodeRecord> getAttendanceForStudent(@PathVariable long studentId, @PathVariable long courseOfferingId) {
-        return studentService.getAllBarcodeRecordForStudentByCourseOffering(courseOfferingId, studentId);
+    @GetMapping("student/courseOfferings/{courseOfferingId}/barcodeRecords")
+    public List<BarcodeRecord> getAttendanceForStudent(@PathVariable long courseOfferingId) {
+        return studentService.getAllBarcodeRecordForStudentByCourseOffering(courseOfferingId);
 
     }
 }

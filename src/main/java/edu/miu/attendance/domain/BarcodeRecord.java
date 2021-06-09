@@ -15,11 +15,11 @@ public class BarcodeRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private LocalDate date;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Student student;
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Location location;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private TimeSlot timeSlot;
 }

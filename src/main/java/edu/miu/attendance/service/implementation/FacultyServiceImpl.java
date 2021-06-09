@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,6 +59,7 @@ public class FacultyServiceImpl implements FacultyService {
         Faculty faculty = getFacultyById(id);
         return courseOfferingDAO.getCourseOfferingsByFaculty(faculty)
                 .stream()
+                .filter(courseOffering -> courseOffering.getStart_date().isAfter(LocalDate.now().minusMonths(6)))
                 .map(courseOffering -> courseOffering.getCourse()).collect(Collectors.toList());
     }
 
