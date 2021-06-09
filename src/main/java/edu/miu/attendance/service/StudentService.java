@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface StudentService {
     Student findByUsername(String username);
+
     Student registerStudent(StudentRequest student);
 
     List<Student> getAllStudent();
