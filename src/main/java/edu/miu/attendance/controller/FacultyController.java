@@ -21,8 +21,7 @@ public class FacultyController {
 
     @Autowired
     private FacultyService facultyService;
-
-
+   
 
     @GetMapping("/faculty/{id}/courses")
     public List<Course> getCoursesForFaculty(@PathVariable long id) {
@@ -44,6 +43,7 @@ public class FacultyController {
                                               @PathVariable long studentId,
                                               @PathVariable String status) {
         facultyService.changeBarcodeAttendanceStatus(courseOffId,studentId,status);
+
     }
 
 

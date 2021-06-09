@@ -21,14 +21,20 @@ public class StudentController {
     @Autowired
     BarcodeRecordService barcodeRecordService;
 
-    @PostMapping("students/register")
-    public Student registerStudent(@RequestBody StudentRequest studentRequest) {
-        return studentService.registerStudent(studentRequest);
+
+    @GetMapping("students")
+    public List<Student> getAllStudents() {
+        return studentService.getAllStudent();
     }
 
     @GetMapping("students/{id}")
     public Student getStudentById(@PathVariable long id) {
         return studentService.findStudentById(id);
+    }
+
+    @PostMapping("students/register")
+    public Student registerStudent(@RequestBody StudentRequest studentRequest) {
+        return studentService.registerStudent(studentRequest);
     }
 
     @GetMapping("students/{id}/courses")
@@ -37,13 +43,19 @@ public class StudentController {
     }
 
     @PostMapping("students/{id}/checkinBarcode")
-    public BarcodeRecord addBarcodeRecord(@PathVariable long id, BarcodeRequest barcodeRequest) {
+    public BarcodeRecord addBarcodeRecord(@PathVariable long id, @RequestBody BarcodeRequest barcodeRequest) {
         return barcodeRecordService.addBarcodeRecord(id, barcodeRequest);
     }
 
-    @GetMapping("student/{studentId}/courseOffering/{courseOfferingId}/barcodeRecords")
-    public List<BarcodeRecord> getAttendanceForStudent(@PathVariable long studentId, @PathVariable long courseOfferingId){
-        return studentService.getAllBarcodeRecordForStudentByCourseOffering(courseOfferingId,studentId);
+    @GetMapping("students/{id}/barcodeRecords")
+    public List<BarcodeRecord> getAllBarcodeRecordsOfStudent(@PathVariable long id){
+        return studentService.getAllBarcodeRecordForStudent(id);
+
+    }
+
+    @GetMapping("students/{studentId}/courseOffering/{courseOfferingId}/barcodeRecords")
+    public List<BarcodeRecord> getAttendanceForStudent(@PathVariable long studentId, @PathVariable long courseOfferingId) {
+        return studentService.getAllBarcodeRecordForStudentByCourseOffering(courseOfferingId, studentId);
 
     }
 }

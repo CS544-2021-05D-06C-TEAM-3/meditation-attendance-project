@@ -18,8 +18,9 @@ public class BarcodeRecord {
     private String attendanceStatus;
     @ManyToOne
     private Student student;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Location location;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private TimeSlot timeSlot;
 }

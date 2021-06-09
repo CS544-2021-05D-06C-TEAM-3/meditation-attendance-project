@@ -39,7 +39,14 @@ public class StudentServiceImpl implements StudentService {
         newStudent.setEmail(student.getEmail());
         newStudent.setEntry(student.getEntry());
         newStudent.setBarcode(student.getBarcode());
+        newStudent.setUsername(student.getUsername());
+        newStudent.setPassword(student.getPassword());
         return studentDAO.save(newStudent);
+    }
+
+    @Override
+    public List<Student> getAllStudent() {
+        return studentDAO.findAll();
     }
 
     @Override
@@ -71,10 +78,16 @@ public class StudentServiceImpl implements StudentService {
         CourseOffering courseOffering = courseOfferingService.getCourseOfferingById(courseOfferingId);
         Student student = findStudentById(studentId);
         List<BarcodeRecord> barcodeRecords = barcodeRecordDAO.findAllByStudent(student);
-        barcodeRecords.stream()
-                .filter(barcodeRecord -> barcodeRecord.getDate().isBefore(courseOffering.getEnd_date())
-                        && barcodeRecord.getDate().isAfter(courseOffering.getStart_date()));
 
-        return barcodeRecords;
+
+        return barcodeRecords.stream()
+                .filter(barcodeRecord -> barcodeRecord.getDate().isBefore(courseOffering.getEnd_date())
+                        && barcodeRecord.getDate().isAfter(courseOffering.getStart_date())).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BarcodeRecord> getAllBarcodeRecordForStudent(long id) {
+        Student student = findStudentById(id);
+        return barcodeRecordDAO.findAllByStudent(student);
     }
 }

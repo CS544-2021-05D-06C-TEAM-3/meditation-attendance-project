@@ -12,6 +12,8 @@ public interface StudentService {
 
     Student registerStudent(StudentRequest student);
 
+    List<Student> getAllStudent();
+
     Student findStudentById(long id);
 
     void deleteStudentById(long id);
@@ -21,5 +23,7 @@ public interface StudentService {
     List<CourseOffering> getAllCourseOfferingsForStudent(long id);
 
     List<BarcodeRecord> getAllBarcodeRecordForStudentByCourseOffering(long courseOfferingId, long studentId);
+
+    List<BarcodeRecord> getAllBarcodeRecordForStudent(long id);
 
 }
