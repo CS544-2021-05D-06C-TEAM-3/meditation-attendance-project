@@ -49,9 +49,8 @@ public class DataLoader implements CommandLineRunner {
         courseOfferings();
         createSessions();
         registerStudents();
-
-
     }
+    
     private void createRoles(){
         Role roleAdmin = new Role(1,"ROLE_ADMIN");
         Role rolePERSONNEL = new Role(2,"ROLE_PERSONNEL");
@@ -68,7 +67,7 @@ public class DataLoader implements CommandLineRunner {
         student.setLastName("horseman");
         student.setEmail("blen@gmail.com");
         student.setUsername("blen");
-        student.setPassword("test");
+        student.setPassword("$2a$10$XaAMek3HlCKIXcdz9Jow5.xV4HAfauFSALmOc/erTZWSentRJ9TIK");
         student.setEntry(LocalDate.now());
         student.setBarcode("abc223");
 
@@ -80,26 +79,26 @@ public class DataLoader implements CommandLineRunner {
         student1.setPassword("$2a$10$XaAMek3HlCKIXcdz9Jow5.xV4HAfauFSALmOc/erTZWSentRJ9TIK");//123
         student1.setEntry(LocalDate.now());
         student1.setBarcode("611930");
-        //student1.setRoleList();
+        //student1.setRoleList()
         studentDAO.saveAll(Arrays.asList(student, student1));
         System.out.println(studentDAO.findAll().toString());
     }
     private void createFaculties(){
         Faculty faculty = new Faculty();
-        faculty.setFirstName("testprof");
-        faculty.setLastName("test");
-        faculty.setEmail("prof@gmail.com");
-        faculty.setUsername("prof");
-        faculty.setPassword("123");
+        faculty.setFirstName("Prof. Payman");
+        faculty.setLastName("Salek");
+        faculty.setEmail("psalek@miu.edu");
+        faculty.setUsername("psalek");
+        faculty.setPassword("$2a$10$XaAMek3HlCKIXcdz9Jow5.xV4HAfauFSALmOc/erTZWSentRJ9TIK");
         faculty.setPosition("Professor");
 
         Faculty faculty1= new Faculty();
-        faculty1.setFirstName("testprof1");
-        faculty1.setLastName("test");
-        faculty1.setEmail("prof@gmail.com");
-        faculty1.setUsername("prof");
-        faculty1.setPassword("123");
-        faculty.setPosition("Teaching Assistant");
+        faculty1.setFirstName("Prof Dean");
+        faculty1.setLastName("AL-Tarawneh");
+        faculty1.setEmail("dtarawneh@miu.edu");
+        faculty1.setUsername("dean");
+        faculty1.setPassword("$2a$10$XaAMek3HlCKIXcdz9Jow5.xV4HAfauFSALmOc/erTZWSentRJ9TIK");
+        faculty.setPosition("Professor");
 
         facultyDAO.saveAll(Arrays.asList(faculty, faculty1));
         System.out.println("id" + faculty.getId());
