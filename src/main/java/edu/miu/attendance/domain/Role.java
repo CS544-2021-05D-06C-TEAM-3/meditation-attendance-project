@@ -27,4 +27,6 @@ public class Role {
         this.id = id;
         this.role = role;
     }
+
+    public void addPerson(Person person) {  personList.add(person); }
 }
