@@ -24,7 +24,8 @@ public class UserDataDto {
 
         if(userDetails.getRoles().stream().anyMatch(r -> r.getRole().equals("ROLE_ADMIN"))) {
             this.role = "ADMIN";
-            //a.put("", "");
+            a.put("course", "view");
+            a.put("student", "all");
         }
         else if(userDetails.getRoles().stream().anyMatch(r -> r.getRole().equals("ROLE_PERSONNEL"))) {
             this.role = "PERSONNEL";
@@ -38,8 +39,7 @@ public class UserDataDto {
         else {
             this.role = "STUDENT";
         }
-        a.put("action", "manage");
-        a.put("subject", "all");
+
         ability.add(a);
     }
 }
