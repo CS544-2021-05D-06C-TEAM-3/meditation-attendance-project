@@ -3,10 +3,11 @@ package edu.miu.attendance.controller;
 import edu.miu.attendance.config.JPAPersonDetails;
 import edu.miu.attendance.config.JPAPersonDetailsService;
 import edu.miu.attendance.domain.Course;
-import edu.miu.attendance.dto.BadCredentialDto;
-import edu.miu.attendance.dto.JwtTokenDto;
-import edu.miu.attendance.dto.LoginRequestDto;
-import edu.miu.attendance.dto.UserDataDto;
+import edu.miu.attendance.domain.CourseOffering;
+import edu.miu.attendance.domain.Person;
+import edu.miu.attendance.domain.Student;
+import edu.miu.attendance.dto.*;
+import edu.miu.attendance.repository.CourseOfferingRepository;
 import edu.miu.attendance.security.JwtUtil;
 import edu.miu.attendance.security.SecurityUtils;
 import edu.miu.attendance.service.StudentService;
@@ -19,8 +20,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping("/authenticate")
@@ -36,6 +39,9 @@ public class AuthenticationController {
 
     @Autowired
     StudentService studentService;
+
+    @Autowired
+    protected CourseOfferingRepository courseOfferingRepository;
 
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody LoginRequestDto loginRequest) {
@@ -54,8 +60,16 @@ public class AuthenticationController {
     }
 
     @GetMapping("/courses")
-    List<Course> getStudentCourses(@RequestParam(required = false) String q) {
+    List<CourseDto> getStudentCourses(@RequestParam(required = false) String q) {
         String username = SecurityUtils.getUsername();
-        return studentService.getAllCoursesByStudent(1);
+        Student user = studentService.findByUsername(username);
+        return getAllCoursesByStudent(user);
+    }
+
+    public List<CourseDto> getAllCoursesByStudent(Student user) {
+        List<CourseOffering> courses = courseOfferingRepository.findAll();
+        return StreamSupport.stream(courses.spliterator(), false)
+                .map(CourseDto::new)
+                .collect(Collectors.toList());
     }
 }

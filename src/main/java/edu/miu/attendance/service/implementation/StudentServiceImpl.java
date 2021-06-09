@@ -32,6 +32,11 @@ public class StudentServiceImpl implements StudentService {
 
 
     @Override
+    public Student findByUsername(String username) {
+        return null;
+    }
+
+    @Override
     public Student registerStudent(StudentRequest student) {
         Student newStudent = new Student();
         newStudent.setFirstName(student.getFirstName());
