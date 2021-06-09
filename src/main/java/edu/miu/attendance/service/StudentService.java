@@ -19,7 +19,7 @@ public interface StudentService {
 
     void deleteStudentById(long id);
 
-    List<Course> getAllCoursesByStudent(long id);
+    List<Course> getAllCoursesByStudent();
 
     List<CourseOffering> getAllCourseOfferingsForStudent(long id);
 

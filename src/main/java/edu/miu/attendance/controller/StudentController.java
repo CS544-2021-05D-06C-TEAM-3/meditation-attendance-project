@@ -38,7 +38,7 @@ public class StudentController {
     }
 
     @GetMapping("students/courses")
-    public List<Course> getCoursesForStudent() {//this need change to return CourseDto
+    public List<Course> getCoursesForStudent() {
         return studentService.getAllCoursesByStudent();
     }
 
