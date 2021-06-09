@@ -37,9 +37,9 @@ public class StudentController {
         return studentService.registerStudent(studentRequest);
     }
 
-    @GetMapping("students/{id}/courses")
-    public List<Course> getCoursesForStudent(@PathVariable long id) {
-        return studentService.getAllCoursesByStudent(id);
+    @GetMapping("students/courses")
+    public List<Course> getCoursesForStudent() {
+        return studentService.getAllCoursesByStudent();
     }
 
     @PostMapping("students/{id}/checkinBarcode")

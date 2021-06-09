@@ -6,6 +6,7 @@ import edu.miu.attendance.repository.BarcodeRecordRepository;
 import edu.miu.attendance.repository.CourseOfferingRepository;
 import edu.miu.attendance.repository.RegistrationRepository;
 import edu.miu.attendance.repository.StudentRepository;
+import edu.miu.attendance.security.SecurityUtils;
 import edu.miu.attendance.service.CourseOfferingService;
 import edu.miu.attendance.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,8 +68,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Course> getAllCoursesByStudent(long id) {
-        Student student = findStudentById(id);
+    public List<Course> getAllCoursesByStudent() {
+        String username = SecurityUtils.getUsername();
+        Student student = findByUsername(username);
         return registrationDAO.findAllRegistrationByStudent(student).stream()
                 .map(registration -> registration.getCourseOffering().getCourse()).collect(Collectors.toList());
     }
