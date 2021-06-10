@@ -8,7 +8,6 @@ import java.time.LocalDate;
 
 @Data
 public class BarcodeRequest {
-
     LocalDate date;
     Location location;
     TimeSlot slot;

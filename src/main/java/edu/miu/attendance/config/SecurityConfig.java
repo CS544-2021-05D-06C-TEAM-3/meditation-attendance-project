@@ -38,6 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/authenticate/*").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/faculty/**").hasAuthority("ROLE_FACULTY")
+                .antMatchers("/student/**").hasAuthority("ROLE_STUDENT")
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
