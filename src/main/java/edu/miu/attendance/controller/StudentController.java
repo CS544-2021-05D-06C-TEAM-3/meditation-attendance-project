@@ -2,17 +2,20 @@ package edu.miu.attendance.controller;
 
 import edu.miu.attendance.domain.BarcodeRecord;
 import edu.miu.attendance.domain.Course;
+import edu.miu.attendance.domain.CourseOffering;
 import edu.miu.attendance.domain.Student;
 import edu.miu.attendance.model.BarcodeRequest;
 import edu.miu.attendance.model.StudentRequest;
 import edu.miu.attendance.service.BarcodeRecordService;
 import edu.miu.attendance.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@Secured("ROLE_STUDENT")
 public class StudentController {
 
     @Autowired
@@ -27,32 +30,37 @@ public class StudentController {
         return studentService.getAllStudent();
     }
 
-    @GetMapping("student/{id}")
+    @GetMapping("students/{id}")
     public Student getStudentById(@PathVariable long id) {
         return studentService.findStudentById(id);
     }
 
-    @PostMapping("student/register")
+    @PostMapping("students")
     public Student registerStudent(@RequestBody StudentRequest studentRequest) {
         return studentService.registerStudent(studentRequest);
     }
 
-    @GetMapping("student/courses")
+    @GetMapping("students/courses")
     public List<Course> getCoursesForStudent() {
         return studentService.getAllCoursesByStudent();
     }
 
-    @PostMapping("student/checkinBarcode")
+    @GetMapping("students/courseOfferings")
+    public List<CourseOffering> getCourseOfferingsForStudent() {
+        return studentService.getAllCourseOfferingsForStudent();
+    }
+
+    @PostMapping("students/checkinBarcode")
     public BarcodeRecord addBarcodeRecord(@RequestBody BarcodeRequest barcodeRequest) {
         return barcodeRecordService.addBarcodeRecord(barcodeRequest);
     }
 
-    @GetMapping("student/barcodeRecords")
+    @GetMapping("students/barcodeRecords")
     public List<BarcodeRecord> getAllBarcodeRecordsOfStudent(){
         return studentService.getAllBarcodeRecordForStudent();
 
     }
-    @GetMapping("student/courseOfferings/{courseOfferingId}/barcodeRecords")
+    @GetMapping("students/courseOfferings/{courseOfferingId}/barcodeRecords")
     public List<BarcodeRecord> getAttendanceForStudent(@PathVariable long courseOfferingId) {
         return studentService.getAllBarcodeRecordForStudentByCourseOffering(courseOfferingId);
 

@@ -9,6 +9,7 @@ import edu.miu.attendance.service.BarcodeRecordService;
 import edu.miu.attendance.service.FacultyService;
 import edu.miu.attendance.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@Secured("ROLE_FACULTY")
 public class FacultyController {
     @Autowired
     RegistrationService registrationService;
@@ -41,10 +43,5 @@ public class FacultyController {
         return facultyService.getAllStudentForFaculty(id);
     }
 
-    @GetMapping("/student/{studentId}/courseOffering/{courseOfferingId}/barcodeRecords")
-    public List<BarcodeRecord> getAttendanceForStudent(@PathVariable long studentId, @PathVariable long courseOfferingId) {
-        return facultyService.getBarcodeRecordsByCourseOfferingForFaculty(courseOfferingId, studentId);
-
-    }
 
 }
