@@ -42,5 +42,5 @@ public class Person {
         this.username = username;
         this.password = password;
     }
-
+    public void addRole(Role role) {  roleList.add(role); }
 }
