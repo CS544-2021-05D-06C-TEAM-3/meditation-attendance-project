@@ -1,5 +1,6 @@
 package edu.miu.attendance.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.apache.commons.lang3.builder.ToStringExclude;
 import org.jetbrains.annotations.NotNull;
@@ -13,7 +14,6 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Table(name="person")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
@@ -32,6 +32,7 @@ public class Person {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     @ToStringExclude
+    @JsonIgnore
     private Set<Role> roleList = new HashSet<>();
 
     public Person(String firstName, String lastName, String email, String username, String password) {
