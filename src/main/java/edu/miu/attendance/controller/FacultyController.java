@@ -27,23 +27,18 @@ public class FacultyController {
     @Autowired
     private FacultyService facultyService;
 
-
-
     @GetMapping("/faculty/courses")
     public List<Course> getCoursesForFaculty() {
         return facultyService.findCoursesByFaculty();
     }
-
     @GetMapping("faculty/{id}")
     public Faculty getStudentById(@PathVariable long id) {
         return facultyService.getFacultyById(id);
     }
-
-    @PostMapping("faculty/register")
-    public Faculty registerStudent(@RequestBody FacultyRequest facultyRequest) {
+    @PostMapping("faculty")
+    public Faculty registerFaculty(@RequestBody FacultyRequest facultyRequest) {
         return facultyService.registerFaculty(facultyRequest);
     }
-
     @GetMapping("/faculty/courseOfferings")
     public List<CourseOffering> getCourseOfferingsForFaculty() {
         return facultyService.findCourseOfferingByFaculty();
