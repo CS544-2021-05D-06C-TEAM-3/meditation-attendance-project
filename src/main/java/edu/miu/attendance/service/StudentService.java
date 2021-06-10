@@ -4,6 +4,7 @@ import edu.miu.attendance.domain.BarcodeRecord;
 import edu.miu.attendance.domain.Course;
 import edu.miu.attendance.domain.CourseOffering;
 import edu.miu.attendance.domain.Student;
+import edu.miu.attendance.dto.CourseDto;
 import edu.miu.attendance.model.StudentRequest;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface StudentService {
 
     void deleteStudentById(long id);
 
-    List<Course> getAllCoursesByStudent();
+    List<CourseDto> getAllCoursesByStudent();
 
     List<CourseOffering> getAllCourseOfferingsForStudent(long id);
 

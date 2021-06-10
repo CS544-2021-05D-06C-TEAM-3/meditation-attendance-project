@@ -147,7 +147,7 @@ public class DataLoader implements CommandLineRunner {
 
     private void courseOfferings() {
         Optional<Course> ea = courseDAO.findById(1L);
-        Optional<Faculty> faculty = facultyDAO.findById(3L);
+        Optional<Faculty> faculty = facultyDAO.findById(4L);
         System.out.println("faculty" + faculty);
 
         CourseOffering courseOffering = new CourseOffering();
@@ -157,7 +157,7 @@ public class DataLoader implements CommandLineRunner {
         courseOffering.setFaculty(faculty.get());
 
         Optional<Course> waa = courseDAO.findById(2L);
-        Optional<Faculty> faculty1 = facultyDAO.findById(4L);
+        Optional<Faculty> faculty1 = facultyDAO.findById(3L);
 
         CourseOffering courseOffering1 = new CourseOffering();
         courseOffering1.setStart_date(LocalDate.of(2021, 4, 12));

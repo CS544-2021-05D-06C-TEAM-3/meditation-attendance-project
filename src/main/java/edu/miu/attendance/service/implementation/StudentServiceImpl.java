@@ -1,6 +1,7 @@
 package edu.miu.attendance.service.implementation;
 
 import edu.miu.attendance.domain.*;
+import edu.miu.attendance.dto.CourseDto;
 import edu.miu.attendance.model.StudentRequest;
 import edu.miu.attendance.repository.BarcodeRecordRepository;
 import edu.miu.attendance.repository.CourseOfferingRepository;
@@ -15,6 +16,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Transactional
 @Service
@@ -68,11 +70,16 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Course> getAllCoursesByStudent() {
+    public List<CourseDto> getAllCoursesByStudent() {
         String username = SecurityUtils.getUsername();
         Student student = findByUsername(username);
-        return registrationDAO.findAllRegistrationByStudent(student).stream()
-                .map(registration -> registration.getCourseOffering().getCourse()).collect(Collectors.toList());
+
+        List<CourseOffering> courses = registrationDAO.findAllRegistrationByStudent(student).stream()
+                .map(registration -> registration.getCourseOffering()).collect(Collectors.toList());
+
+        return StreamSupport.stream(courses.spliterator(), false)
+                .map(CourseDto::new)
+                .collect(Collectors.toList());
     }
 
     @Override
