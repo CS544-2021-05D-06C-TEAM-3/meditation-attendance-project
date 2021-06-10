@@ -3,8 +3,11 @@ package edu.miu.attendance.controller;
 
 import edu.miu.attendance.domain.BarcodeRecord;
 import edu.miu.attendance.domain.Course;
+import edu.miu.attendance.domain.CourseOffering;
 import edu.miu.attendance.domain.Student;
-import edu.miu.attendance.service.*;
+import edu.miu.attendance.service.BarcodeRecordService;
+import edu.miu.attendance.service.FacultyService;
+import edu.miu.attendance.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,9 +23,15 @@ public class FacultyController {
     @Autowired
     private FacultyService facultyService;
 
-    @GetMapping("/faculty/{id}/courses")
-    public List<Course> getCoursesForFaculty(@PathVariable long id) {
-        return facultyService.findCoursesByFaculty(id);
+
+    @GetMapping("/faculty/courses")
+    public List<Course> getCoursesForFaculty() {
+        return facultyService.findCoursesByFaculty();
+    }
+
+    @GetMapping("/faculty/courseOfferings")
+    public List<CourseOffering> getCourseOfferingsForFaculty() {
+        return facultyService.findCourseOfferingByFaculty();
     }
 
     @GetMapping("/faculty/courseOffering/{id}/students")
@@ -30,11 +39,10 @@ public class FacultyController {
         return facultyService.getAllStudentForFaculty(id);
     }
 
-    @GetMapping("/faculty/{studentId}/student/courseOffering/{courseOfferingId}/barcodeRecords")
-    public List<BarcodeRecord> getAttendanceForStudent(@PathVariable long studentId, @PathVariable long courseOfferingId){
-        return facultyService.getBarcodeRecordsByCourseOfferingForFaculty(courseOfferingId,studentId);
+    @GetMapping("/student/{studentId}/courseOffering/{courseOfferingId}/barcodeRecords")
+    public List<BarcodeRecord> getAttendanceForStudent(@PathVariable long studentId, @PathVariable long courseOfferingId) {
+        return facultyService.getBarcodeRecordsByCourseOfferingForFaculty(courseOfferingId, studentId);
 
     }
-
 
 }

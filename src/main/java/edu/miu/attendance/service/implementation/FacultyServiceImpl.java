@@ -5,6 +5,7 @@ import edu.miu.attendance.repository.BarcodeRecordRepository;
 import edu.miu.attendance.repository.CourseOfferingRepository;
 import edu.miu.attendance.repository.FacultyRepository;
 import edu.miu.attendance.repository.RegistrationRepository;
+import edu.miu.attendance.security.SecurityUtils;
 import edu.miu.attendance.service.CourseOfferingService;
 import edu.miu.attendance.service.FacultyService;
 import edu.miu.attendance.service.StudentService;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,6 +42,12 @@ public class FacultyServiceImpl implements FacultyService {
 
 
     @Override
+    public Faculty findByUsername(String username) {
+        Optional<Faculty> faculty = facultyDAO.findByUsername(username);
+        return faculty.get();
+    }
+
+    @Override
     public Faculty getFacultyById(long id) {
         return facultyDAO.findById(id).get();
     }
@@ -54,9 +62,10 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
     @Override
-    public List<Course> findCoursesByFaculty(long id) {
+    public List<Course> findCoursesByFaculty() {
         //TODO add filter six months
-        Faculty faculty = getFacultyById(id);
+        String username = SecurityUtils.getUsername();
+        Faculty faculty = findByUsername(username);
         return courseOfferingDAO.getCourseOfferingsByFaculty(faculty)
                 .stream()
                 .filter(courseOffering -> courseOffering.getStart_date().isAfter(LocalDate.now().minusMonths(6)))
@@ -64,8 +73,9 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
     @Override
-    public List<CourseOffering> findCourseOfferingByFaculty(long id) {
-        Faculty faculty = getFacultyById(id);
+    public List<CourseOffering> findCourseOfferingByFaculty() {
+        String username = SecurityUtils.getUsername();
+        Faculty faculty = findByUsername(username);
         return courseOfferingDAO.getCourseOfferingsByFaculty(faculty);
     }
 
