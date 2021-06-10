@@ -10,5 +10,6 @@ public interface RegistrationService {
 
     Registration register(Registration registration);
     List<Registration> getAllRegistrationByCourseOffering(CourseOffering courseOffering);
+    List<Registration> getAllRegistration();
 
 }

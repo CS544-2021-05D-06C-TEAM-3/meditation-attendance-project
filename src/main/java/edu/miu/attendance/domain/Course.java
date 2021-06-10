@@ -1,5 +1,6 @@
 package edu.miu.attendance.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -22,6 +23,7 @@ public class Course {
     private String code;
     private String description;
     @OneToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
     @ToStringExclude
     private List<CourseOffering> courseOfferings = new ArrayList<CourseOffering>();
 

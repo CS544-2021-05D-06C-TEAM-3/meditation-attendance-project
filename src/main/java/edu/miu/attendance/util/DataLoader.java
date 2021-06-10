@@ -55,6 +55,7 @@ public class DataLoader implements CommandLineRunner {
         createCourses();
         courseOfferings();
         createSessions();
+        createLocations();
         registerStudents();
     }
 
@@ -89,7 +90,7 @@ public class DataLoader implements CommandLineRunner {
         student1.setLastName("ALDINI");
         student1.setEmail("mhaldini@miu.edu");
         student1.setUsername("maldini");
-        student1.setPassword("$2a$10$XaAMek3HlCKIXcdz9Jow5.xV4HAfauFSALmOc/erTZWSentRJ9TIK");//123
+        student1.setPassword("$2a$10$XaAMek3HlCKIXcdz9Jow5.xV4HAfauFSALmOc/erTZWSentRJ9TIK");// 123
         student1.setEntry(LocalDate.now());
         student1.setBarcode("611930");
         studentDAO.saveAll(Arrays.asList(student, student1));
@@ -121,7 +122,8 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("id" + faculty.getId());
         System.out.println(facultyDAO.findAll().toString());
     }
-    private void registerStudents(){
+
+    private void registerStudents() {
         Optional<Student> student1 = studentDAO.findById(1L);
         Optional<CourseOffering> EACourseOffering = courseOfferingDAO.findById(1L);
 
@@ -140,14 +142,14 @@ public class DataLoader implements CommandLineRunner {
         System.out.println(registrationDAO.findAll().toString());
     }
 
-    private void courseOfferings(){
+    private void courseOfferings() {
         Optional<Course> ea = courseDAO.findById(1L);
         Optional<Faculty> faculty = facultyDAO.findById(3L);
         System.out.println("faculty" + faculty);
 
         CourseOffering courseOffering = new CourseOffering();
-        courseOffering.setStart_date(LocalDate.of(2021,5,12));
-        courseOffering.setEnd_date(LocalDate.of(2021,6,10));
+        courseOffering.setStart_date(LocalDate.of(2021, 5, 12));
+        courseOffering.setEnd_date(LocalDate.of(2021, 6, 10));
         courseOffering.setCourse(ea.get());
         courseOffering.setFaculty(faculty.get());
 
@@ -155,8 +157,8 @@ public class DataLoader implements CommandLineRunner {
         Optional<Faculty> faculty1 = facultyDAO.findById(4L);
 
         CourseOffering courseOffering1 = new CourseOffering();
-        courseOffering1.setStart_date(LocalDate.of(2021,4,12));
-        courseOffering1.setEnd_date(LocalDate.of(2021,5,10));
+        courseOffering1.setStart_date(LocalDate.of(2021, 4, 12));
+        courseOffering1.setEnd_date(LocalDate.of(2021, 5, 10));
         courseOffering1.setCourse(waa.get());
         courseOffering1.setFaculty(faculty1.get());
 
@@ -164,7 +166,7 @@ public class DataLoader implements CommandLineRunner {
         System.out.println(courseOfferingDAO.findAll().toString());
     }
 
-    private void createCourses(){
+    private void createCourses() {
         Course course1 = new Course();
         course1.setName("Enterprise Architecture");
         course1.setDescription("Architecture");
@@ -179,22 +181,23 @@ public class DataLoader implements CommandLineRunner {
         System.out.println(courseDAO.findAll().toString());
 
     }
-    private void createTimeSlots(){
+
+    private void createTimeSlots() {
         TimeSlot morningSlot = new TimeSlot();
-        morningSlot.setBeginTime(LocalTime.of(10,0,0));
-        morningSlot.setEndTime(LocalTime.of(12,30,0));
+        morningSlot.setBeginTime(LocalTime.of(10, 0, 0));
+        morningSlot.setEndTime(LocalTime.of(12, 30, 0));
         morningSlot.setDescription("This is morning slot");
 
         TimeSlot afternoonSlot = new TimeSlot();
-        afternoonSlot.setBeginTime(LocalTime.of(10,0,0));
-        afternoonSlot.setEndTime(LocalTime.of(12,30,0));
+        afternoonSlot.setBeginTime(LocalTime.of(10, 0, 0));
+        afternoonSlot.setEndTime(LocalTime.of(12, 30, 0));
         afternoonSlot.setDescription("This is afternoon slot");
 
         timeSlotDAO.saveAll(Arrays.asList(morningSlot, afternoonSlot));
         System.out.println(timeSlotDAO.findAll().toString());
     }
 
-    private void createSessions(){
+    private void createSessions() {
         Optional<CourseOffering> courseOffering = courseOfferingDAO.findById(1L);
         TimeSlot timeSlot = timeSlotDAO.getById(1L);
         CourseSession AMSession = new CourseSession();

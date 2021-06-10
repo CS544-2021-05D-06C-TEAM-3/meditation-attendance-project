@@ -28,6 +28,11 @@ public class RegistrationServiceImpl implements RegistrationService {
         return null;
     }
 
+    @Override
+    public List<Registration> getAllRegistration() {
+        return registrationDAO.findAll();
+    }
+
     /*
      * @Override public List<Registration>
      * getAllRegistrationByCourseOffering(CourseOffering courseOffering) {

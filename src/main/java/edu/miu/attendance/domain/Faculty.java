@@ -1,5 +1,6 @@
 package edu.miu.attendance.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.apache.commons.lang3.builder.ToStringExclude;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class Faculty extends Person {
     private String position;
     @OneToMany(mappedBy = "faculty", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
     @ToStringExclude
     private List<CourseOffering> courseOfferingList = new ArrayList<CourseOffering>();
 
