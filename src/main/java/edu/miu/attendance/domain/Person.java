@@ -13,7 +13,7 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+//@ToString
 @Table(name="person")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Person {

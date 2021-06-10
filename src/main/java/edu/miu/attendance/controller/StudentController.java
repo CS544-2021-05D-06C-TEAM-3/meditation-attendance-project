@@ -3,6 +3,7 @@ package edu.miu.attendance.controller;
 import edu.miu.attendance.domain.BarcodeRecord;
 import edu.miu.attendance.domain.Course;
 import edu.miu.attendance.domain.Student;
+import edu.miu.attendance.dto.CourseDto;
 import edu.miu.attendance.model.BarcodeRequest;
 import edu.miu.attendance.model.StudentRequest;
 import edu.miu.attendance.service.BarcodeRecordService;
@@ -38,7 +39,7 @@ public class StudentController {
     }
 
     @GetMapping("student/courses")
-    public List<Course> getCoursesForStudent() {
+    public List<CourseDto> getCoursesForStudent() {
         return studentService.getAllCoursesByStudent();
     }
 

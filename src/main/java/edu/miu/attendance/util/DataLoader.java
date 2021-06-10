@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -42,6 +44,11 @@ public class DataLoader implements CommandLineRunner {
     @Autowired
     LocationRepository locationDAO;
 
+    private Role roleAdmin;
+    private Role rolePERSONNEL;
+    private Role roleSTUDENT;
+    private Role roleFACULTY;
+
     @Override
     public void run(String... args) throws Exception {
         createRoles();
@@ -55,29 +62,22 @@ public class DataLoader implements CommandLineRunner {
         registerStudents();
     }
 
-    private void createLocations() {
-        Location location = new Location();
-        location.setDescription("dalby");
+    private void createRoles(){
+        this.roleAdmin = new Role(1,"ROLE_ADMIN");
+        this.rolePERSONNEL = new Role(2,"ROLE_PERSONNEL");
+        this.roleSTUDENT = new Role(3,"ROLE_STUDENT");
+        this.roleFACULTY = new Role(4,"ROLE_FACULTY");
 
-        Location location1 = new Location();
-        location.setDescription("verill");
-
-        locationDAO.saveAll(Arrays.asList(location, location1));
-        System.out.println(locationDAO.findAll().toString());
-    }
-
-    private void createRoles() {
-        Role roleAdmin = new Role(1, "ROLE_ADMIN");
-        Role rolePERSONNEL = new Role(2, "ROLE_PERSONNEL");
-        Role roleSTUDENT = new Role(3, "ROLE_STUDENT");
-        Role roleFACULTY = new Role(4, "ROLE_FACULTY");
-
-        roleDAO.saveAll(Arrays.asList(roleAdmin, rolePERSONNEL, roleSTUDENT, roleFACULTY));
+        roleDAO.saveAll(Arrays.asList(roleAdmin, rolePERSONNEL, roleSTUDENT,roleFACULTY));
         System.out.println(roleDAO.findAll().toString());
     }
 
     private void createStudents() {
+        Set<Role> role  = new HashSet<Role>();
+        role.add(roleSTUDENT);
+
         Student student = new Student();
+        student.setRoleList(role);
         student.setFirstName("bojack");
         student.setLastName("horseman");
         student.setEmail("blen@gmail.com");
@@ -87,6 +87,7 @@ public class DataLoader implements CommandLineRunner {
         student.setBarcode("abc223");
 
         Student student1 = new Student();
+        student1.setRoleList(role);
         student1.setFirstName("Mohammed");
         student1.setLastName("ALDINI");
         student1.setEmail("mhaldini@miu.edu");
@@ -94,13 +95,15 @@ public class DataLoader implements CommandLineRunner {
         student1.setPassword("$2a$10$XaAMek3HlCKIXcdz9Jow5.xV4HAfauFSALmOc/erTZWSentRJ9TIK");// 123
         student1.setEntry(LocalDate.now());
         student1.setBarcode("611930");
-        // student1.setRoleList()
         studentDAO.saveAll(Arrays.asList(student, student1));
         System.out.println(studentDAO.findAll().toString());
     }
-
     private void createFaculties() {
+        Set<Role> role  = new HashSet<Role>();
+        role.add(roleFACULTY);
+
         Faculty faculty = new Faculty();
+        faculty.setRoleList(role);
         faculty.setFirstName("Prof. Payman");
         faculty.setLastName("Salek");
         faculty.setEmail("psalek@miu.edu");
@@ -108,7 +111,8 @@ public class DataLoader implements CommandLineRunner {
         faculty.setPassword("$2a$10$XaAMek3HlCKIXcdz9Jow5.xV4HAfauFSALmOc/erTZWSentRJ9TIK");
         faculty.setPosition("Professor");
 
-        Faculty faculty1 = new Faculty();
+        Faculty faculty1= new Faculty();
+        faculty1.setRoleList(role);
         faculty1.setFirstName("Prof Dean");
         faculty1.setLastName("AL-Tarawneh");
         faculty1.setEmail("dtarawneh@miu.edu");
@@ -142,7 +146,7 @@ public class DataLoader implements CommandLineRunner {
 
     private void courseOfferings() {
         Optional<Course> ea = courseDAO.findById(1L);
-        Optional<Faculty> faculty = facultyDAO.findById(3L);
+        Optional<Faculty> faculty = facultyDAO.findById(4L);
         System.out.println("faculty" + faculty);
 
         CourseOffering courseOffering = new CourseOffering();
@@ -152,7 +156,7 @@ public class DataLoader implements CommandLineRunner {
         courseOffering.setFaculty(faculty.get());
 
         Optional<Course> waa = courseDAO.findById(2L);
-        Optional<Faculty> faculty1 = facultyDAO.findById(4L);
+        Optional<Faculty> faculty1 = facultyDAO.findById(3L);
 
         CourseOffering courseOffering1 = new CourseOffering();
         courseOffering1.setStart_date(LocalDate.of(2021, 4, 12));
@@ -193,6 +197,17 @@ public class DataLoader implements CommandLineRunner {
 
         timeSlotDAO.saveAll(Arrays.asList(morningSlot, afternoonSlot));
         System.out.println(timeSlotDAO.findAll().toString());
+    }
+
+    private void createLocations() {
+        Location location = new Location();
+        location.setDescription("dalby");
+
+        Location location1 = new Location();
+        location.setDescription("verill");
+
+        locationDAO.saveAll(Arrays.asList(location, location1));
+        System.out.println(locationDAO.findAll().toString());
     }
 
     private void createSessions() {

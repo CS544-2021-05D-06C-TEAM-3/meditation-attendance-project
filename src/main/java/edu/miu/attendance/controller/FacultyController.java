@@ -20,10 +20,8 @@ public class FacultyController {
     @Autowired
     RegistrationService registrationService;
 
-
     @Autowired
     private FacultyService facultyService;
-
 
 
     @GetMapping("/faculty/courses")

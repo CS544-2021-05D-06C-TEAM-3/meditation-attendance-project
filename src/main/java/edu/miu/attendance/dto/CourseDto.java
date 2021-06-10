@@ -23,6 +23,7 @@ public class CourseDto {
     private String facultyName;
 
     public CourseDto(CourseOffering course) {
+        this.id = course.getId();
         this.name = course.getCourse().getName();
         this.code = course.getCourse().getCode();
         this.description = course.getCourse().getDescription();
