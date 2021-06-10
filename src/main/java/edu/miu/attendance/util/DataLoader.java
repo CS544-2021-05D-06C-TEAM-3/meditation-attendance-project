@@ -86,7 +86,6 @@ public class DataLoader implements CommandLineRunner {
         student.setEntry(LocalDate.now());
         student.setBarcode("abc223");
 
-
         Student student1 = new Student();
         student1.setRoleList(role);
         student1.setFirstName("Mohammed");
