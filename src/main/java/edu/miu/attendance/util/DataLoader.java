@@ -41,6 +41,9 @@ public class DataLoader implements CommandLineRunner {
     @Autowired
     RegistrationRepository registrationDAO;
 
+    @Autowired
+    LocationRepository locationDAO;
+
     private Role roleAdmin;
     private Role rolePERSONNEL;
     private Role roleSTUDENT;
@@ -55,7 +58,7 @@ public class DataLoader implements CommandLineRunner {
         createCourses();
         courseOfferings();
         createSessions();
-        //createLocations();
+        createLocations();
         registerStudents();
     }
 
@@ -195,6 +198,17 @@ public class DataLoader implements CommandLineRunner {
 
         timeSlotDAO.saveAll(Arrays.asList(morningSlot, afternoonSlot));
         System.out.println(timeSlotDAO.findAll().toString());
+    }
+
+    private void createLocations() {
+        Location location = new Location();
+        location.setDescription("dalby");
+
+        Location location1 = new Location();
+        location.setDescription("verill");
+
+        locationDAO.saveAll(Arrays.asList(location, location1));
+        System.out.println(locationDAO.findAll().toString());
     }
 
     private void createSessions() {
