@@ -55,7 +55,7 @@ public class DataLoader implements CommandLineRunner {
         createCourses();
         courseOfferings();
         createSessions();
-        createLocations();
+        //createLocations();
         registerStudents();
     }
 
@@ -85,7 +85,7 @@ public class DataLoader implements CommandLineRunner {
 
 
         Student student1 = new Student();
-        student.setRoleList(role);
+        student1.setRoleList(role);
         student1.setFirstName("Mohammed");
         student1.setLastName("ALDINI");
         student1.setEmail("mhaldini@miu.edu");
@@ -110,7 +110,7 @@ public class DataLoader implements CommandLineRunner {
         faculty.setPosition("Professor");
 
         Faculty faculty1= new Faculty();
-        faculty.setRoleList(role);
+        faculty1.setRoleList(role);
         faculty1.setFirstName("Prof Dean");
         faculty1.setLastName("AL-Tarawneh");
         faculty1.setEmail("dtarawneh@miu.edu");
