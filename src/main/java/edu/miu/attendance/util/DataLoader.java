@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -39,6 +41,11 @@ public class DataLoader implements CommandLineRunner {
     @Autowired
     RegistrationRepository registrationDAO;
 
+    private Role roleAdmin;
+    private Role rolePERSONNEL;
+    private Role roleSTUDENT;
+    private Role roleFACULTY;
+
     @Override
     public void run(String... args) throws Exception {
         createRoles();
@@ -50,19 +57,23 @@ public class DataLoader implements CommandLineRunner {
         createSessions();
         registerStudents();
     }
-    
+
     private void createRoles(){
-        Role roleAdmin = new Role(1,"ROLE_ADMIN");
-        Role rolePERSONNEL = new Role(2,"ROLE_PERSONNEL");
-        Role roleSTUDENT = new Role(3,"ROLE_STUDENT");
-        Role roleFACULTY = new Role(4,"ROLE_FACULTY");
+        this.roleAdmin = new Role(1,"ROLE_ADMIN");
+        this.rolePERSONNEL = new Role(2,"ROLE_PERSONNEL");
+        this.roleSTUDENT = new Role(3,"ROLE_STUDENT");
+        this.roleFACULTY = new Role(4,"ROLE_FACULTY");
 
         roleDAO.saveAll(Arrays.asList(roleAdmin, rolePERSONNEL, roleSTUDENT,roleFACULTY));
         System.out.println(roleDAO.findAll().toString());
     }
 
-    private void createStudents(){
+    private void createStudents() {
+        Set<Role> role  = new HashSet<Role>();
+        role.add(roleSTUDENT);
+
         Student student = new Student();
+        student.setRoleList(role);
         student.setFirstName("bojack");
         student.setLastName("horseman");
         student.setEmail("blen@gmail.com");
@@ -71,7 +82,9 @@ public class DataLoader implements CommandLineRunner {
         student.setEntry(LocalDate.now());
         student.setBarcode("abc223");
 
+
         Student student1 = new Student();
+        student.setRoleList(role);
         student1.setFirstName("Mohammed");
         student1.setLastName("ALDINI");
         student1.setEmail("mhaldini@miu.edu");
@@ -79,12 +92,15 @@ public class DataLoader implements CommandLineRunner {
         student1.setPassword("$2a$10$XaAMek3HlCKIXcdz9Jow5.xV4HAfauFSALmOc/erTZWSentRJ9TIK");//123
         student1.setEntry(LocalDate.now());
         student1.setBarcode("611930");
-        //student1.setRoleList()
         studentDAO.saveAll(Arrays.asList(student, student1));
         System.out.println(studentDAO.findAll().toString());
     }
-    private void createFaculties(){
+    private void createFaculties() {
+        Set<Role> role  = new HashSet<Role>();
+        role.add(roleFACULTY);
+
         Faculty faculty = new Faculty();
+        faculty.setRoleList(role);
         faculty.setFirstName("Prof. Payman");
         faculty.setLastName("Salek");
         faculty.setEmail("psalek@miu.edu");
@@ -93,6 +109,7 @@ public class DataLoader implements CommandLineRunner {
         faculty.setPosition("Professor");
 
         Faculty faculty1= new Faculty();
+        faculty.setRoleList(role);
         faculty1.setFirstName("Prof Dean");
         faculty1.setLastName("AL-Tarawneh");
         faculty1.setEmail("dtarawneh@miu.edu");

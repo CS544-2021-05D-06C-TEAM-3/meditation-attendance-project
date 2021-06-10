@@ -56,6 +56,5 @@ public class StudentController {
     @GetMapping("students/{studentId}/courseOffering/{courseOfferingId}/barcodeRecords")
     public List<BarcodeRecord> getAttendanceForStudent(@PathVariable long studentId, @PathVariable long courseOfferingId) {
         return studentService.getAllBarcodeRecordForStudentByCourseOffering(courseOfferingId, studentId);
-
     }
 }

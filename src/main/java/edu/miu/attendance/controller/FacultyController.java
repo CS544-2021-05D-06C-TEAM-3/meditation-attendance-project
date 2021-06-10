@@ -17,11 +17,8 @@ public class FacultyController {
     @Autowired
     RegistrationService registrationService;
 
-
     @Autowired
     private FacultyService facultyService;
-    
-
 
     @GetMapping("/faculty/{id}/courses")
     public List<Course> getCoursesForFaculty(@PathVariable long id) {
