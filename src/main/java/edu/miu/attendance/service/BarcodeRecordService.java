@@ -8,8 +8,10 @@ import java.util.List;
 
 public interface BarcodeRecordService {
 
+
     BarcodeRecord addBarcodeRecord(BarcodeRequest barcodeRecord);
 
     List<BarcodeRecord> findAllByStudent(Student student);
+
 
 }

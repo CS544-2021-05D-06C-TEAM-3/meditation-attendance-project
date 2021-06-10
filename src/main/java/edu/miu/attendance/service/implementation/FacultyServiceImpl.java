@@ -80,5 +80,25 @@ public class FacultyServiceImpl implements FacultyService {
                         && barcodeRecord.getDate().isAfter(courseOffering.getStart_date())).collect(Collectors.toList());
     }
 
+    @Override
+    public void changeBarcodeAttendanceStatus(long courseOffId,long StdId, String status) {
+        //need to add time slot to set student absent in one record
+        CourseOffering courseOffering = courseOfferingService.getCourseOfferingById(courseOffId);
+        List<CourseSession> courseSessionList=courseOffering.getCourseSessions();
+
+        List<BarcodeRecord> barcodeRecords=getBarcodeRecordsByCourseOfferingForFaculty(courseOffId, StdId);
+        List<BarcodeRecord> barcodeRecordToChange=new ArrayList<>();
+
+        for (CourseSession courseSession:courseSessionList){
+            barcodeRecordToChange=barcodeRecords.stream()
+                    .filter(barcodeRecord -> barcodeRecord.getDate().isBefore(courseSession.getTimeSlot().getBeginTime().toLocalDate())
+                            && barcodeRecord.getDate().isAfter(courseSession.getTimeSlot().getEndTime().toLocalDate())).collect(Collectors.toList());
+        }
+        while (!barcodeRecordToChange.isEmpty()){
+            for (BarcodeRecord barcodeRecord:barcodeRecordToChange){
+                barcodeRecord.setAttendanceStatus(status);
+            }
+        }
+    }
 
 }

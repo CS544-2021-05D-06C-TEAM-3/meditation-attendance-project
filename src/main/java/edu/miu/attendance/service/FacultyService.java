@@ -17,6 +17,6 @@ public interface FacultyService {
 
     List<BarcodeRecord> getBarcodeRecordsByCourseOfferingForFaculty(long courseOfferingId, long studentId);
 
-
+    void changeBarcodeAttendanceStatus(long courseOffId,long id, String status);
 
 }

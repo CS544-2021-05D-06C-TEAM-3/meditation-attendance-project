@@ -15,6 +15,8 @@ public class BarcodeRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private LocalDate date;
+    private String attendanceStatus;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Student student;
     @ManyToOne(fetch = FetchType.EAGER)

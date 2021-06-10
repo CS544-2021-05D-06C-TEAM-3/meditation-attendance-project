@@ -8,6 +8,7 @@ import edu.miu.attendance.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,8 +21,7 @@ public class FacultyController {
 
     @Autowired
     private FacultyService facultyService;
-    
-
+   
 
     @GetMapping("/faculty/{id}/courses")
     public List<Course> getCoursesForFaculty(@PathVariable long id) {
@@ -36,6 +36,13 @@ public class FacultyController {
     @GetMapping("/faculty/{studentId}/student/courseOffering/{courseOfferingId}/barcodeRecords")
     public List<BarcodeRecord> getAttendanceForStudent(@PathVariable long studentId, @PathVariable long courseOfferingId){
         return facultyService.getBarcodeRecordsByCourseOfferingForFaculty(courseOfferingId,studentId);
+    }
+
+    @PutMapping("/faculty/{courseOffId}/{studentId}/{status}")
+    public void changeStudentAttendanceStatus(@PathVariable long courseOffId,
+                                              @PathVariable long studentId,
+                                              @PathVariable String status) {
+        facultyService.changeBarcodeAttendanceStatus(courseOffId,studentId,status);
 
     }
 
