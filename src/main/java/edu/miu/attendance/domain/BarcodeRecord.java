@@ -16,11 +16,12 @@ public class BarcodeRecord {
     private long id;
     private LocalDate date;
     private String attendanceStatus;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Student student;
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Location location;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private TimeSlot timeSlot;
 }

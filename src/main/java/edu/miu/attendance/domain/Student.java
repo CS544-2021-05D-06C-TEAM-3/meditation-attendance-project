@@ -20,6 +20,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class Student extends Person{
     private String barcode;
+    private String attendanceStatus;
     private LocalDate entry;
 
 //    @OneToMany
