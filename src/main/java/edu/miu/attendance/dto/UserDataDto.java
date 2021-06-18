@@ -24,7 +24,6 @@ public class UserDataDto {
 
         if(userDetails.getRoles().stream().anyMatch(r -> r.getRole().equals("ROLE_ADMIN"))) {
             this.role = "ADMIN";
-
         }
         else if(userDetails.getRoles().stream().anyMatch(r -> r.getRole().equals("ROLE_PERSONNEL"))) {
             this.role = "PERSONNEL";

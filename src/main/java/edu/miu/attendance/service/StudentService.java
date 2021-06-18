@@ -22,7 +22,7 @@ public interface StudentService {
 
     List<CourseDto> getAllCoursesByStudent();
 
-    List<CourseOffering> getAllCourseOfferingsForStudent(long id);
+    List<CourseOffering> getAllCourseOfferingsForStudent();
 
     List<BarcodeRecord> getAllBarcodeRecordForStudentByCourseOffering(long courseOfferingId);
 

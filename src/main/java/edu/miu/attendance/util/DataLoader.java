@@ -85,6 +85,7 @@ public class DataLoader implements CommandLineRunner {
         student.setPassword("$2a$10$XaAMek3HlCKIXcdz9Jow5.xV4HAfauFSALmOc/erTZWSentRJ9TIK");
         student.setEntry(LocalDate.now());
         student.setBarcode("abc223");
+        student.setRoleList(role);
 
         Student student1 = new Student();
         student1.setRoleList(role);
@@ -110,6 +111,7 @@ public class DataLoader implements CommandLineRunner {
         faculty.setUsername("psalek");
         faculty.setPassword("$2a$10$XaAMek3HlCKIXcdz9Jow5.xV4HAfauFSALmOc/erTZWSentRJ9TIK");
         faculty.setPosition("Professor");
+        faculty.setRoleList(role);
 
         Faculty faculty1= new Faculty();
         faculty1.setRoleList(role);
@@ -119,6 +121,7 @@ public class DataLoader implements CommandLineRunner {
         faculty1.setUsername("dean");
         faculty1.setPassword("$2a$10$XaAMek3HlCKIXcdz9Jow5.xV4HAfauFSALmOc/erTZWSentRJ9TIK");
         faculty.setPosition("Professor");
+        faculty1.setRoleList(role);
 
         facultyDAO.saveAll(Arrays.asList(faculty, faculty1));
         System.out.println("id" + faculty.getId());

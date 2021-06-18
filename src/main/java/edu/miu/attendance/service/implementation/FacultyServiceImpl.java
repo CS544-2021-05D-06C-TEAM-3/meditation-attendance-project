@@ -1,6 +1,7 @@
 package edu.miu.attendance.service.implementation;
 
 import edu.miu.attendance.domain.*;
+import edu.miu.attendance.model.FacultyRequest;
 import edu.miu.attendance.repository.BarcodeRecordRepository;
 import edu.miu.attendance.repository.CourseOfferingRepository;
 import edu.miu.attendance.repository.FacultyRepository;
@@ -45,6 +46,18 @@ public class FacultyServiceImpl implements FacultyService {
     public Faculty findByUsername(String username) {
         Optional<Faculty> faculty = facultyDAO.findByUsername(username);
         return faculty.get();
+    }
+
+    @Override
+    public Faculty registerFaculty(FacultyRequest faculty) {
+        Faculty newFaculty = new Faculty();
+        newFaculty.setFirstName(faculty.getFirstName());
+        newFaculty.setLastName(faculty.getLastName());
+        newFaculty.setEmail(faculty.getEmail());
+        newFaculty.setPosition(faculty.getPosition());
+        newFaculty.setUsername(faculty.getUsername());
+        newFaculty.setPassword(faculty.getPassword());
+        return facultyDAO.save(newFaculty);
     }
 
     @Override

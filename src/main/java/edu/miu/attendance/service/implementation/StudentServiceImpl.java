@@ -34,6 +34,9 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     BarcodeRecordRepository barcodeRecordDAO;
 
+    @Autowired
+    CourseOfferingRepository courseOfferingDAO;
+
 
     @Override
     public Student findByUsername(String username) {
@@ -83,8 +86,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<CourseOffering> getAllCourseOfferingsForStudent(long id) {
-        Student student = findStudentById(id);
+    public List<CourseOffering> getAllCourseOfferingsForStudent() {
+        String username = SecurityUtils.getUsername();
+        Student student = findByUsername(username);
+        System.out.println("studentId" + student.getId());
+//        return courseOfferingDAO.getCourseOfferingForStudent(student.getId());
         return registrationDAO.findAllRegistrationByStudent(student).stream()
                 .map(registration -> registration.getCourseOffering()).collect(Collectors.toList());
     }
